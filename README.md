@@ -34,7 +34,7 @@ Vamos criar então uma aplicação que nos permita consultar, criar e editar ess
 
 ## Modelo de dados :memo:
 ### Tipo de profissional
-```json
+```js
 {
   "id": xxx,                  // ID 
   "descricao": "test",        // descricao do tipo *Obrigatório
@@ -46,7 +46,7 @@ Vamos criar então uma aplicação que nos permita consultar, criar e editar ess
 ```
 
 ### Profissional
-```json
+```js
 {
     "id": xxx,                   // ID
     "nome": "teste",             // Nome do profisisonal *Obrigatório
