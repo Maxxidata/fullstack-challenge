@@ -1,5 +1,5 @@
 {
     "*.{js,jsx}": [
-        "eslint 'src/**' --fix"
+        "eslint 'src/**' --fix --no-error-on-unmatched-pattern"
     ]
 }
