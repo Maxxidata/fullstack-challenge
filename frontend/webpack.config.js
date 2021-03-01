@@ -9,26 +9,31 @@ module.exports = {
     publicPath: 'public/js',
     filename: 'bundle.js'
   },
-  resolve: {
-    extensions: ['js', 'jsx', 'scss', 'css']
-  },
   module: {
-    rules: [{
-      test: /\.(s?)css$/,
-      use: [
-        {
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            modules: true
-          }
-        }, {
-          loader: 'sass-loader'
+    rules: [
+      {
+        test: /\.js(x?)$/, // all files that end ".js"
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
         }
-      ]
-    }]
+      },
+      {
+        test: /\.(s?)css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }, {
+            loader: 'sass-loader'
+          }
+        ]
+      }]
   },
   devServer: {
     contentBase: './public',
