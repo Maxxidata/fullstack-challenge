@@ -3,5 +3,8 @@ module.exports = {
   collectCoverageFrom: ['<rootDir>/src/**/*.{js,jsx}'],
   coverageDirectory: 'coverage',
   testEnvironment: 'jsdom',
-  transform: { '.+\\.(js|jsx)$': 'babel-jest' }
+  transform: { '.+\\.(js|jsx)$': 'babel-jest' },
+  moduleNameMapper: {
+    '\\.scss$': 'identity-obj-proxy'
+  }
 }

@@ -10,7 +10,25 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['js', 'jsx']
+    extensions: ['js', 'jsx', 'scss', 'css']
+  },
+  module: {
+    rules: [{
+      test: /\.(s?)css$/,
+      use: [
+        {
+          loader: 'style-loader'
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true
+          }
+        }, {
+          loader: 'sass-loader'
+        }
+      ]
+    }]
   },
   devServer: {
     contentBase: './public',
