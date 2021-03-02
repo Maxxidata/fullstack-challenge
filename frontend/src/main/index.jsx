@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Home from '../presentation/pages/home/home.jsx'
+import App from './App.jsx'
 import 'antd/dist/antd.css'
 
 ReactDOM.render(
-    <Home/>,
-    document.getElementById('main')
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('main')
 )
