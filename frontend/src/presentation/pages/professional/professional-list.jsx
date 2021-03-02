@@ -42,6 +42,7 @@ const ProfessionalList = () => {
   return (
     <Content>
       <DataGrid
+        path="/professionals"
         columns={columns}
       />
     </Content>

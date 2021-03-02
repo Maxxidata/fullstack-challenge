@@ -1,18 +1,10 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import { Table, Space, Row, Button } from 'antd'
 import PropTypes from 'prop-types'
+import useFetch from '../../hooks/useFetch.js'
 
-const DataGrid = ({ columns, dataSource, onSearch, pagination }) => {
-  const handleTableChange = useCallback((params) => {
-    console.log(params)
-    if (onSearch === ' function') {
-      onSearch(params)
-    }
-  }, [onSearch])
-
-  useEffect(() => {
-    handleTableChange(pagination)
-  }, [])
+const DataGrid = ({ columns, pagination, path }) => {
+  const { isLoading, data } = useFetch(path)
 
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
@@ -21,10 +13,9 @@ const DataGrid = ({ columns, dataSource, onSearch, pagination }) => {
       </Row>
       <Table
         columns={columns}
-        dataSource={dataSource}
+        dataSource={data.items}
         pagination={pagination}
-        loading={false}
-        onChange={handleTableChange}
+        loading={isLoading}
       />
     </Space>
   )
@@ -38,17 +29,15 @@ DataGrid.propTypes = {
       key: PropTypes.string
     })
   ),
-  dataSource: PropTypes.array,
-  onSearch: PropTypes.func.isRequired,
   pagination: PropTypes.exact({
     pageSize: PropTypes.number,
     current: PropTypes.number
-  })
+  }),
+  path: PropTypes.func.isRequired
 }
 
 DataGrid.defaultProps = {
   columns: [],
-  dataSource: [],
   pagination: {
     pageSize: 5,
     current: 1
