@@ -8,6 +8,9 @@
         "standard",
         "plugin:react/recommended"
     ],
+    "rules":{
+        "react/display-name": "off"
+    },
     "plugins":["react"],
     "overrides": [
         {

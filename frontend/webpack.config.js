@@ -5,9 +5,9 @@ module.exports = {
   mode: 'development',
   entry: './src/main/index.jsx',
   output: {
-    path: path.join(__dirname, 'public/js'),
-    publicPath: 'public/js',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/dist'
   },
   module: {
     rules: [
