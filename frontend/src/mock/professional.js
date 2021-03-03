@@ -6,7 +6,7 @@ const database = {
       id: '1',
       name: 'Mike',
       phone: '(45) 9999-9999',
-      email: 'mike@gmail.com ',
+      email: 'mike@gmail.com',
       professionalType: {
         id: '1',
         description: 'Médico(a)'
@@ -17,7 +17,7 @@ const database = {
       id: '2',
       name: 'Pedro',
       phone: '(45) 9999-9999',
-      email: 'pedro@gmail.com ',
+      email: 'pedro@gmail.com',
       professionalType: {
         id: '2',
         description: 'Professor(a)'
@@ -28,6 +28,7 @@ const database = {
 }
 
 mock.onGet('/professionals').reply(() => [200, { items: database.professionals }])
+
 mock.onPost('/professionals').reply((request) => {
   const professional = JSON.parse(request.data)
   database.professionals.push({ id: database.professionals.length + 1, ...professional })
