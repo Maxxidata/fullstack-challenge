@@ -14,4 +14,9 @@ describe('FormItem', () => {
     makeSut(error)
     expect(screen.getByText(error)).toBeInTheDocument()
   })
+
+  test(('Should not show an error message when error was not passed'), () => {
+    makeSut(null)
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+  })
 })
