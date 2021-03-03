@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { withRouter } from 'react-router-dom'
+
 import { Content, DataGrid } from '@/presentation/components'
 
 const ProfessionalTypeList = () => {
@@ -34,4 +34,4 @@ const ProfessionalTypeList = () => {
   )
 }
 
-export default withRouter(ProfessionalTypeList)
+export default ProfessionalTypeList
