@@ -4,9 +4,8 @@ import { Form, Input, Button, Switch, notification } from 'antd'
 import { useFormik } from 'formik'
 import { useParams, withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
-import Content from '../../../components/layout/content/content.jsx'
-import AutoPaginatedSelect from '../../../components/auto-paginated-select/auto-paginated-select.jsx'
-import AxiosHttpClient from '../../../../infra/usecases/http/axios-http-client'
+import { Content, AutoPaginatedSelect } from '@/presentation/components'
+import { AxiosHttpClient } from '@/infra/usecases/http'
 
 const phoneRegExp = /\(\d{2,}\) \d{4,}-\d{4}/
 

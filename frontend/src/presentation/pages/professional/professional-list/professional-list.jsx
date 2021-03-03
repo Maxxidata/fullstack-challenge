@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import Content from '../../../components/layout/content/content.jsx'
-import DataGrid from '../../../components/datagrid/datagrid.jsx'
+import { Content, DataGrid } from '@/presentation/components'
 
 const ProfessionalList = ({ history }) => {
   const columns = useMemo(() => {
@@ -31,7 +30,7 @@ const ProfessionalList = ({ history }) => {
         title: 'Tipo',
         dataIndex: 'professionalType',
         key: 'professionalType',
-        render: (professionalType) => (professionalType.description)
+        render: (professionalType) => professionalType.description
       },
       {
         title: 'Situação',
@@ -46,9 +45,12 @@ const ProfessionalList = ({ history }) => {
     history.push('/professionals/form/new')
   }, [history])
 
-  const handleEdit = useCallback((record) => {
-    history.push(`/professionals/form/${record.id}`)
-  }, [history])
+  const handleEdit = useCallback(
+    (record) => {
+      history.push(`/professionals/form/${record.id}`)
+    },
+    [history]
+  )
 
   return (
     <Content>

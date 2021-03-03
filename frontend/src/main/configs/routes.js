@@ -6,14 +6,14 @@ export default [
     path: '/professionals',
     exact: true,
     component: React.lazy(() =>
-      import('../../presentation/pages/professional/professional-list/professional-list.jsx')
+      import('@/presentation/pages/professional/professional-list/professional-list.jsx')
     )
   },
   {
     path: '/professionals/form/:id',
     exact: true,
     component: React.lazy(() =>
-      import('../../presentation/pages/professional/professional-form/professional-form.jsx')
+      import('@/presentation/pages/professional/professional-form/professional-form.jsx')
     )
   },
   {
@@ -21,7 +21,7 @@ export default [
     exact: true,
     component: React.lazy(() =>
       import(
-        '../../presentation/pages/professionals-type/professionals-type-list.jsx'
+        '@/presentation/pages/professionals-type/professionals-type-list.jsx'
       )
     )
   },

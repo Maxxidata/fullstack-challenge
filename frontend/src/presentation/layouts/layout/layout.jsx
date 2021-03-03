@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Layout as AntLayout } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import { renderRoutes } from 'react-router-config'
-import routes from '../../../main/configs/routes'
+import routes from '@/main/configs/routes'
 import Navbar from '../navbar/navbar.jsx'
 import Toolbar from '../toolbar/toolbar.jsx'
 

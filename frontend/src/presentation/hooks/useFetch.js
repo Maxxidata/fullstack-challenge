@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import AxiosHttpClient from '../../infra/usecases/http/axios-http-client.js'
+import { AxiosHttpClient } from '@/infra/usecases/http'
 
 const useFetch = (url) => {
   const [loading, setLoading] = useState(false)
