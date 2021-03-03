@@ -1,21 +1,42 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Table, Space, Row, Button } from 'antd'
 import PropTypes from 'prop-types'
 import useFetch from '../../hooks/useFetch.js'
 
-const DataGrid = ({ columns, pagination, path }) => {
+const DataGrid = ({ columns, pagination, path, onNew, onEdit }) => {
   const { isLoading, data } = useFetch(path)
+
+  const handleOnNew = useCallback(() => {
+    if (typeof onNew === 'function') {
+      onNew()
+    }
+  }, [onNew])
+
+  const handleOnEdit = useCallback((record) => {
+    if (typeof onEdit === 'function') {
+      onEdit(record)
+    }
+  }, [onEdit])
 
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
-      <Row align="middle" justify="end">
-        <Button type="primary">Adicionar</Button>
-      </Row>
+      {onNew != null && (
+        <Row align="middle" justify="end">
+          <Button type="primary" onClick={handleOnNew}>
+            Adicionar
+          </Button>
+        </Row>
+      )}
       <Table
         columns={columns}
         dataSource={data.items}
         pagination={pagination}
         loading={isLoading}
+        onRow={(record) => {
+          return {
+            onClick: () => handleOnEdit(record) // click row
+          }
+        }}
       />
     </Space>
   )
@@ -33,7 +54,9 @@ DataGrid.propTypes = {
     pageSize: PropTypes.number,
     current: PropTypes.number
   }),
-  path: PropTypes.func.isRequired
+  path: PropTypes.string.isRequired,
+  onNew: PropTypes.func,
+  onEdit: PropTypes.func
 }
 
 DataGrid.defaultProps = {
@@ -41,6 +64,9 @@ DataGrid.defaultProps = {
   pagination: {
     pageSize: 5,
     current: 1
-  }
+  },
+  onNew: null,
+  onEdit: null
 }
+
 export default DataGrid
