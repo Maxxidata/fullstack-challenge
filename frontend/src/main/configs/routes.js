@@ -17,12 +17,19 @@ export default [
     )
   },
   {
-    path: '/professionals-types',
+    path: '/professional-types',
     exact: true,
     component: React.lazy(() =>
       import(
         '@/presentation/pages/professional-type/professional-type-list/professional-type-list.jsx'
       )
+    )
+  },
+  {
+    path: '/professional-types/form/:id',
+    exact: true,
+    component: React.lazy(() =>
+      import('@/presentation/pages/professional-type/professional-type-form/professional-type-form.jsx')
     )
   },
   {
