@@ -16,4 +16,4 @@ const database = {
   ]
 }
 
-mock.onGet('/professional-types').reply(() => [200, { items: database }])
+mock.onGet('/professional-types').reply(() => [200, { items: database.professionalTypes }])
