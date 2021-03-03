@@ -35,7 +35,7 @@ const Navbar = ({ history, location }) => {
         >
           <SubMenu key="sub1" icon={<UserOutlined />} title="Profisional">
             <Menu.Item key="/professionals">Profissionais</Menu.Item>
-            <Menu.Item key="/professionals-types">
+            <Menu.Item key="/professional-types">
               Tipos de Profissionais
             </Menu.Item>
           </SubMenu>
