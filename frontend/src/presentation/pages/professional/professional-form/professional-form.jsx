@@ -4,7 +4,11 @@ import { Form, Input, Button, Switch, notification } from 'antd'
 import { useFormik } from 'formik'
 import { useParams, withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
-import { Content, AutoPaginatedSelect } from '@/presentation/components'
+import {
+  Content,
+  AutoPaginatedSelect,
+  FormItem
+} from '@/presentation/components'
 import { RemoteProfessional } from '@/data/usecases/professional'
 
 const phoneRegExp = /\(\d{2,}\) \d{4,}-\d{4}/
@@ -64,85 +68,58 @@ const ProfessionalForm = ({ history }) => {
   return (
     <Content>
       <Form layout="vertical" onFinish={formik.handleSubmit} requiredMark>
-        <Form.Item
-          label="Nome"
-          validateStatus={formik.errors.name != null ? 'error' : null}
-          help={formik.errors.name}
-          required
-        >
+        <FormItem label="Nome" error={formik.errors.name} required>
           <Input
             id="name"
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}
           />
-        </Form.Item>
-        <Form.Item
-          label="Telefone"
-          validateStatus={formik.errors.phone != null ? 'error' : null}
-          help={formik.errors.phone}
-        >
+        </FormItem>
+        <FormItem label="Telefone" error={formik.errors.phone}>
           <Input
             id="phone"
             name="phone"
             value={formik.values.phone}
             onChange={formik.handleChange}
           />
-        </Form.Item>
-        <Form.Item
-          label="E-mail"
-          validateStatus={formik.errors.email != null ? 'error' : null}
-          help={formik.errors.email}
-        >
+        </FormItem>
+        <FormItem label="E-mail" error={formik.errors.email}>
           <Input
             id="email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
           />
-        </Form.Item>
-        <Form.Item
-          label="Tipo"
-          validateStatus={
-            formik.errors.professionalType != null ? 'error' : null
-          }
-          help={formik.errors.professionalType}
-          required
-        >
+        </FormItem>
+        <FormItem label="Tipo" error={formik.errors.professionalType} required>
           <AutoPaginatedSelect
             id="professionalType"
             name="professionalType"
             valueField="id"
             labelField="description"
-            path='/professional-types'
+            path="/professional-types"
             value={formik.values.professionalType?.id}
             onChange={(value) =>
               formik.setFieldValue('professionalType', value)
             }
           />
-        </Form.Item>
-        <Form.Item
-          label="Situação"
-          validateStatus={formik.errors.status != null ? 'error' : null}
-          help={formik.errors.status}
-          required
-        >
+        </FormItem>
+        <FormItem label="Situação" error={formik.errors.status} required>
           <Switch
             id="status"
             name="status"
             checkedChildren="Ativo"
             unCheckedChildren="Inativo"
             checked={formik.values.status}
-            onChange={(value) =>
-              formik.setFieldValue('status', value)
-            }
+            onChange={(value) => formik.setFieldValue('status', value)}
           />
-        </Form.Item>
-        <Form.Item>
+        </FormItem>
+        <FormItem>
           <Button type="primary" htmlType="submit">
             Salvar
           </Button>
-        </Form.Item>
+        </FormItem>
       </Form>
     </Content>
   )
