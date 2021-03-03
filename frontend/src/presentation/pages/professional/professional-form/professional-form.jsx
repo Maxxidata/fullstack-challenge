@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import { useParams, withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
 import { Content, AutoPaginatedSelect } from '@/presentation/components'
-import { AxiosHttpClient } from '@/infra/usecases/http'
+import { RemoteProfessional } from '@/data/usecases/professional'
 
 const phoneRegExp = /\(\d{2,}\) \d{4,}-\d{4}/
 
@@ -29,9 +29,9 @@ const ProfessionalForm = ({ history }) => {
     onSubmit: async (values) => {
       try {
         if (parameters.id === 'new') {
-          await AxiosHttpClient.post('/professionals', values)
+          await RemoteProfessional.create(values)
         } else {
-          await AxiosHttpClient.put(`/professionals/${parameters.id}`, values)
+          await RemoteProfessional.update(parameters.id, values)
         }
         history.push('/professionals')
       } catch (error) {
@@ -48,7 +48,7 @@ const ProfessionalForm = ({ history }) => {
 
     async function fetchById (id) {
       try {
-        const { data } = await AxiosHttpClient.get(`/professionals/${id}`)
+        const { data } = await RemoteProfessional.getById(id)
         setData(data)
       } catch (error) {
         notification.error({
