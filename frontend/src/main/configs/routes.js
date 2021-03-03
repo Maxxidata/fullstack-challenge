@@ -21,7 +21,7 @@ export default [
     exact: true,
     component: React.lazy(() =>
       import(
-        '@/presentation/pages/professionals-type/professionals-type-list.jsx'
+        '@/presentation/pages/professional-type/professional-type-list.jsx'
       )
     )
   },
