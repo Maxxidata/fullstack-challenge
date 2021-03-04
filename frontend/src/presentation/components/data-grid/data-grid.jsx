@@ -1,10 +1,14 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Table, Space, Row, Button } from 'antd'
 import PropTypes from 'prop-types'
 import useFetch from '../../hooks/useFetch.js'
 
-const DataGrid = ({ columns, pagination, path, onNew, onEdit }) => {
+const DataGrid = ({ columns, pagination, path, keyField, onNew, onEdit }) => {
   const { isLoading, data } = useFetch(path)
+
+  const dataSource = useMemo(() => {
+    return data.items?.map((item) => ({ key: item[keyField], ...item }))
+  }, [data])
 
   const handleOnNew = useCallback(() => {
     if (typeof onNew === 'function') {
@@ -22,14 +26,15 @@ const DataGrid = ({ columns, pagination, path, onNew, onEdit }) => {
     <Space direction="vertical" style={{ width: '100%' }}>
       {onNew != null && (
         <Row align="middle" justify="end">
-          <Button type="primary" onClick={handleOnNew}>
+          <Button type="primary" size="large" onClick={handleOnNew}>
             Adicionar
           </Button>
         </Row>
       )}
       <Table
+        data-testid='data-grid'
         columns={columns}
-        dataSource={data.items}
+        dataSource={dataSource}
         pagination={pagination}
         loading={isLoading}
         onRow={(record) => {
@@ -56,7 +61,8 @@ DataGrid.propTypes = {
   }),
   path: PropTypes.string.isRequired,
   onNew: PropTypes.func,
-  onEdit: PropTypes.func
+  onEdit: PropTypes.func,
+  keyField: PropTypes.string
 }
 
 DataGrid.defaultProps = {
@@ -66,7 +72,8 @@ DataGrid.defaultProps = {
     current: 1
   },
   onNew: null,
-  onEdit: null
+  onEdit: null,
+  keyField: 'id'
 }
 
 export default DataGrid
