@@ -93,7 +93,11 @@ const ProfessionalForm = ({ history }) => {
             onChange={formik.handleChange}
           />
         </FormItem>
-        <FormItem label={i18next.t('type')}error={formik.errors.professionalType} required>
+        <FormItem
+          label={i18next.t('type')}
+          error={formik.errors.professionalType}
+          required
+        >
           <AutoPaginatedSelect
             id="professionalType"
             name="professionalType"
@@ -106,7 +110,11 @@ const ProfessionalForm = ({ history }) => {
             }
           />
         </FormItem>
-        <FormItem label={i18next.t('status')} error={formik.errors.status} required>
+        <FormItem
+          label={i18next.t('status')}
+          error={formik.errors.status}
+          required
+        >
           <Switch
             id="status"
             name="status"
@@ -117,7 +125,7 @@ const ProfessionalForm = ({ history }) => {
           />
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" size="large">
             {i18next.t('save')}
           </Button>
         </FormItem>

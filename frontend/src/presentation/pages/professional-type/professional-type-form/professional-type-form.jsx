@@ -5,10 +5,7 @@ import i18next from 'i18next'
 import { useFormik } from 'formik'
 import { useParams, withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
-import {
-  Content,
-  FormItem
-} from '@/presentation/components'
+import { Content, FormItem } from '@/presentation/components'
 import { RemoteProfessionalType } from '@/data/usecases/professional-type'
 
 const professionalSchema = Yup.object().shape({
@@ -63,7 +60,11 @@ const ProfessionalTypeForm = ({ history }) => {
   return (
     <Content>
       <Form layout="vertical" onFinish={formik.handleSubmit} requiredMark>
-        <FormItem label={i18next.t('description')} error={formik.errors.description} required>
+        <FormItem
+          label={i18next.t('description')}
+          error={formik.errors.description}
+          required
+        >
           <Input
             id="description"
             name="description"
@@ -71,7 +72,11 @@ const ProfessionalTypeForm = ({ history }) => {
             onChange={formik.handleChange}
           />
         </FormItem>
-        <FormItem label={i18next.t('status')} error={formik.errors.status} required>
+        <FormItem
+          label={i18next.t('status')}
+          error={formik.errors.status}
+          required
+        >
           <Switch
             id="status"
             name="status"
@@ -82,8 +87,8 @@ const ProfessionalTypeForm = ({ history }) => {
           />
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit">
-          {i18next.t('save')}
+          <Button type="primary" htmlType="submit" size="large">
+            {i18next.t('save')}
           </Button>
         </FormItem>
       </Form>
