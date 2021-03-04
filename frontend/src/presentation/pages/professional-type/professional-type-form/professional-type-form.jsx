@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, Button, Switch, notification } from 'antd'
+import i18next from 'i18next'
 import { useFormik } from 'formik'
 import { useParams, withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
@@ -34,7 +35,7 @@ const ProfessionalTypeForm = ({ history }) => {
         history.push('/professional-types')
       } catch (error) {
         notification.error({
-          message: 'Não foi possivel realizar a operação',
+          message: i18next.t('requestMessageError'),
           description: error.message
         })
       }
@@ -50,7 +51,7 @@ const ProfessionalTypeForm = ({ history }) => {
         setData(data)
       } catch (error) {
         notification.error({
-          message: 'Não foi possivel realizar a operação',
+          message: i18next.t('requestMessageError'),
           description: error.message
         })
       }
@@ -62,7 +63,7 @@ const ProfessionalTypeForm = ({ history }) => {
   return (
     <Content>
       <Form layout="vertical" onFinish={formik.handleSubmit} requiredMark>
-        <FormItem label="Descrição" error={formik.errors.description} required>
+        <FormItem label={i18next.t('description')} error={formik.errors.description} required>
           <Input
             id="description"
             name="description"
@@ -70,19 +71,19 @@ const ProfessionalTypeForm = ({ history }) => {
             onChange={formik.handleChange}
           />
         </FormItem>
-        <FormItem label="Situação" error={formik.errors.status} required>
+        <FormItem label={i18next.t('status')} error={formik.errors.status} required>
           <Switch
             id="status"
             name="status"
-            checkedChildren="Ativo"
-            unCheckedChildren="Inativo"
+            checkedChildren={i18next.t('active')}
+            unCheckedChildren={i18next.t('inactive')}
             checked={formik.values.status}
             onChange={(value) => formik.setFieldValue('status', value)}
           />
         </FormItem>
         <FormItem>
           <Button type="primary" htmlType="submit">
-            Salvar
+          {i18next.t('save')}
           </Button>
         </FormItem>
       </Form>

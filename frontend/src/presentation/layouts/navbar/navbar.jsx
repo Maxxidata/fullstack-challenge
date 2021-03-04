@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Layout, Menu } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
+import i18next from 'i18next'
 import { withRouter } from 'react-router-dom'
 
 const { Sider } = Layout
@@ -33,10 +34,16 @@ const Navbar = ({ history, location }) => {
           selectedKeys={[root, pathname]}
           onClick={handleMenuClick}
         >
-          <SubMenu key="professional" icon={<UserOutlined />} title="Profisional">
-            <Menu.Item key="/professionals">Profissionais</Menu.Item>
+          <SubMenu
+            key="professional"
+            icon={<UserOutlined />}
+            title={i18next.t('professional')}
+          >
+            <Menu.Item key="/professionals">
+              {i18next.t('professionals')}
+            </Menu.Item>
             <Menu.Item key="/professional-types">
-              Tipos de Profissionais
+              {i18next.t('professionalTypes')}
             </Menu.Item>
           </SubMenu>
         </Menu>

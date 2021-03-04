@@ -1,26 +1,27 @@
 import React, { useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+import i18next from 'i18next'
 import { Content, DataGrid } from '@/presentation/components'
 
 const ProfessionalTypeList = ({ history }) => {
   const columns = useMemo(() => {
     return [
       {
-        title: 'id',
+        title: i18next.t('id'),
         dataIndex: 'id',
         key: 'id'
       },
       {
-        title: 'Descrição',
+        title: i18next.t('description'),
         dataIndex: 'description',
         key: 'name'
       },
       {
-        title: 'Situação',
+        title: i18next.t('status'),
         dataIndex: 'status',
         key: 'status',
-        render: (status) => (status ? 'Ativo' : 'Inativo')
+        render: (status) => (status ? i18next.t('active') : i18next.t('inactive'))
       }
     ]
   })

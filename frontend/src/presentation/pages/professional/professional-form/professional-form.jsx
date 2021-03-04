@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, Button, Switch, notification } from 'antd'
+import i18next from 'i18next'
 import { useFormik } from 'formik'
 import { useParams, withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
@@ -40,7 +41,7 @@ const ProfessionalForm = ({ history }) => {
         history.push('/professionals')
       } catch (error) {
         notification.error({
-          message: 'Não foi possivel realizar a operação',
+          message: i18next.t('requestMessageError'),
           description: error.message
         })
       }
@@ -56,7 +57,7 @@ const ProfessionalForm = ({ history }) => {
         setData(data)
       } catch (error) {
         notification.error({
-          message: 'Não foi possivel realizar a operação',
+          message: i18next.t('requestMessageError'),
           description: error.message
         })
       }
@@ -68,7 +69,7 @@ const ProfessionalForm = ({ history }) => {
   return (
     <Content>
       <Form layout="vertical" onFinish={formik.handleSubmit} requiredMark>
-        <FormItem label="Nome" error={formik.errors.name} required>
+        <FormItem label={i18next.t('name')} error={formik.errors.name} required>
           <Input
             id="name"
             name="name"
@@ -76,7 +77,7 @@ const ProfessionalForm = ({ history }) => {
             onChange={formik.handleChange}
           />
         </FormItem>
-        <FormItem label="Telefone" error={formik.errors.phone}>
+        <FormItem label={i18next.t('phone')} error={formik.errors.phone}>
           <Input
             id="phone"
             name="phone"
@@ -84,7 +85,7 @@ const ProfessionalForm = ({ history }) => {
             onChange={formik.handleChange}
           />
         </FormItem>
-        <FormItem label="E-mail" error={formik.errors.email}>
+        <FormItem label={i18next.t('email')} error={formik.errors.email}>
           <Input
             id="email"
             name="email"
@@ -92,7 +93,7 @@ const ProfessionalForm = ({ history }) => {
             onChange={formik.handleChange}
           />
         </FormItem>
-        <FormItem label="Tipo" error={formik.errors.professionalType} required>
+        <FormItem label={i18next.t('type')}error={formik.errors.professionalType} required>
           <AutoPaginatedSelect
             id="professionalType"
             name="professionalType"
@@ -105,19 +106,19 @@ const ProfessionalForm = ({ history }) => {
             }
           />
         </FormItem>
-        <FormItem label="Situação" error={formik.errors.status} required>
+        <FormItem label={i18next.t('status')} error={formik.errors.status} required>
           <Switch
             id="status"
             name="status"
-            checkedChildren="Ativo"
-            unCheckedChildren="Inativo"
+            checkedChildren={i18next.t('active')}
+            unCheckedChildren={i18next.t('inactive')}
             checked={formik.values.status}
             onChange={(value) => formik.setFieldValue('status', value)}
           />
         </FormItem>
         <FormItem>
           <Button type="primary" htmlType="submit">
-            Salvar
+            {i18next.t('save')}
           </Button>
         </FormItem>
       </Form>

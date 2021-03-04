@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react'
 import { Table, Space, Row, Button } from 'antd'
+import i18next from 'i18next'
 import PropTypes from 'prop-types'
 import useFetch from '../../hooks/useFetch.js'
 
@@ -27,7 +28,7 @@ const DataGrid = ({ columns, pagination, path, keyField, onNew, onEdit }) => {
       {onNew != null && (
         <Row align="middle" justify="end">
           <Button type="primary" size="large" onClick={handleOnNew}>
-            Adicionar
+            {i18next.t('add')}
           </Button>
         </Row>
       )}
