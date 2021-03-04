@@ -29,11 +29,11 @@ const Navbar = ({ history, location }) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultOpenKeys={[root]}
+          defaultOpenKeys={['professional']}
           selectedKeys={[root, pathname]}
           onClick={handleMenuClick}
         >
-          <SubMenu key="sub1" icon={<UserOutlined />} title="Profisional">
+          <SubMenu key="professional" icon={<UserOutlined />} title="Profisional">
             <Menu.Item key="/professionals">Profissionais</Menu.Item>
             <Menu.Item key="/professional-types">
               Tipos de Profissionais
