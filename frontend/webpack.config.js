@@ -29,6 +29,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       }]
   },
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: './public',
     writeToDisk: true,
