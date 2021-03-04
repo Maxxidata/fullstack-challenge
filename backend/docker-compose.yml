@@ -1,0 +1,26 @@
+# docker-compose.yml
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      PORT: ${PORT}
+    ports:
+      - ${PORT}:3000
+    volumes:
+      - .:/app/
+      - /app/node_modules
+
+  db:
+    image: postgres:10.4
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB}
+    volumes:
+      - ./database/dump:/docker-entrypoint-initdb.d:rw
+      - ./database/db80:/var/lib/postgresql/data:rw

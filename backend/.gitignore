@@ -1,3 +1,6 @@
 node_modules
 # dotenv environment variables file
 .env
+
+# database
+database/db80
