@@ -17,11 +17,14 @@ const DataGrid = ({ columns, pagination, path, keyField, onNew, onEdit }) => {
     }
   }, [onNew])
 
-  const handleOnEdit = useCallback((record) => {
-    if (typeof onEdit === 'function') {
-      onEdit(record)
-    }
-  }, [onEdit])
+  const handleOnEdit = useCallback(
+    (record) => {
+      if (typeof onEdit === 'function') {
+        onEdit(record)
+      }
+    },
+    [onEdit]
+  )
 
   return (
     <Space direction="vertical" style={{ width: '100%' }}>
@@ -33,7 +36,7 @@ const DataGrid = ({ columns, pagination, path, keyField, onNew, onEdit }) => {
         </Row>
       )}
       <Table
-        data-testid='data-grid'
+        data-testid="data-grid"
         columns={columns}
         dataSource={dataSource}
         pagination={pagination}

@@ -25,7 +25,11 @@ const Select = ({ valueField, labelField, options, onChange, ...props }) => {
   )
 
   return (
-    <AntSelect options={formattedOptions} onChange={handleOnChange} {...props} />
+    <AntSelect
+      options={formattedOptions}
+      onChange={handleOnChange}
+      {...props}
+    />
   )
 }
 

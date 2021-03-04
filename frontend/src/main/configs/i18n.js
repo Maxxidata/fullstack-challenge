@@ -42,16 +42,15 @@ const resources = {
   }
 }
 
-i18n.use(initReactI18next)
-  .init({
-    resources,
-    compatibilityJSON: 'v3',
-    fallbackLng: 'pt',
-    keySeparator: false,
+i18n.use(initReactI18next).init({
+  resources,
+  compatibilityJSON: 'v3',
+  fallbackLng: 'pt',
+  keySeparator: false,
 
-    interpolation: {
-      escapeValue: false
-    }
-  })
+  interpolation: {
+    escapeValue: false
+  }
+})
 
 export default i18n

@@ -21,7 +21,8 @@ const ProfessionalTypeList = ({ history }) => {
         title: i18next.t('status'),
         dataIndex: 'status',
         key: 'status',
-        render: (status) => (status ? i18next.t('active') : i18next.t('inactive'))
+        render: (status) =>
+          status ? i18next.t('active') : i18next.t('inactive')
       }
     ]
   })
