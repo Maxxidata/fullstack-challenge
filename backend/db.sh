@@ -12,4 +12,11 @@ then
     exit 0
 fi
 
+if [ "$1" = "seed" ]
+then
+    docker exec -it backend_app_1 /bin/sh -c 'npm run db:seed';
+    echo "Done ...";
+    exit 0
+fi
+
 help
