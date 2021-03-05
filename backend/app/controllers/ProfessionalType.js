@@ -4,12 +4,6 @@ module.exports = {
   async create(req, res) {
     const { description, status } = req.body;
     try {
-      if (description == null || status == null) {
-        return res
-          .status(400)
-          .send({ description: "required", status: "required" });
-      }
-
       const professionlType = await ProfessionalType.create(req.body);
 
       return res.json(professionlType);
