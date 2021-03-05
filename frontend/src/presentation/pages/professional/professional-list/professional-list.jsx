@@ -57,7 +57,7 @@ const ProfessionalList = ({ history }) => {
   return (
     <Content>
       <DataGrid
-        path="/professionals"
+        path="/professional/professionals"
         columns={columns}
         onNew={handleNew}
         onEdit={handleEdit}

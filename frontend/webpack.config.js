@@ -43,7 +43,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify('http://localhost::3000/api')
+      'process.env.API_URL': JSON.stringify('http://localhost:3000/')
     })
   ]
 }

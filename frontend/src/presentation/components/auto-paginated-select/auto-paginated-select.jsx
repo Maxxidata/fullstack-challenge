@@ -6,7 +6,7 @@ import useFetch from '../../hooks/useFetch.js'
 const AutoPaginatedSelect = ({ path, ...props }) => {
   const { loading, data } = useFetch(path)
 
-  return <Select options={data.items ?? []} loading={loading} {...props} />
+  return <Select options={data ?? []} loading={loading} {...props} />
 }
 
 AutoPaginatedSelect.propTypes = {

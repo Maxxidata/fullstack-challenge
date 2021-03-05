@@ -16,8 +16,8 @@ const phoneRegExp = /\(\d{2,}\) \d{4,}-\d{4}/
 
 const professionalSchema = Yup.object().shape({
   name: Yup.string().required(),
-  phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
-  email: Yup.string().email(),
+  phone: Yup.string().nullable().matches(phoneRegExp, 'Phone number is not valid'),
+  email: Yup.string().email().nullable(),
   professionalType: Yup.object().required(),
   status: Yup.boolean().required()
 })
@@ -103,7 +103,7 @@ const ProfessionalForm = ({ history }) => {
             name="professionalType"
             valueField="id"
             labelField="description"
-            path="/professional-types"
+            path="/professional/types"
             value={formik.values.professionalType?.id}
             onChange={(value) =>
               formik.setFieldValue('professionalType', value)

@@ -41,7 +41,7 @@ const ProfessionalTypeList = ({ history }) => {
   return (
     <Content>
       <DataGrid
-        path="/professional-types"
+        path="/professional/types"
         columns={columns}
         onNew={handleNew}
         onEdit={handleEdit}

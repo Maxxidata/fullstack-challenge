@@ -4,7 +4,7 @@ import { AxiosHttpClient } from '@/infra/usecases/http'
 const useFetch = (url) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
 
   useEffect(() => {
     if (!url) return
@@ -13,7 +13,8 @@ const useFetch = (url) => {
       try {
         const { data } = await AxiosHttpClient.get(url)
         setData(data)
-      } catch {
+      } catch (e) {
+        console.error(e)
         setError(false)
       } finally {
         setLoading(false)

@@ -28,10 +28,10 @@ const database = {
 }
 
 mock
-  .onGet('/professionals')
-  .reply(() => [200, { items: database.professionals }])
+  .onGet('/professional/professionals')
+  .reply(() => [200, database.professionals])
 
-mock.onGet(/\/professionals\/\d+/).reply((request) => {
+mock.onGet(/\/professional\/professionals\/\d+/).reply((request) => {
   const id = request.url.split('/')[2]
   const professional = database.professionals.find(
     (record) => record.id.toString() === id
@@ -44,7 +44,7 @@ mock.onGet(/\/professionals\/\d+/).reply((request) => {
   return [200, professional]
 })
 
-mock.onPost('/professionals').reply((request) => {
+mock.onPost('/professional/professionals').reply((request) => {
   const professional = JSON.parse(request.data)
   database.professionals.push({
     id: database.professionals.length + 1,
@@ -53,7 +53,7 @@ mock.onPost('/professionals').reply((request) => {
   return [200, professional]
 })
 
-mock.onPut(/\/professionals\/\d+/).reply((request) => {
+mock.onPut(/\/professional\/professionals\/\d+/).reply((request) => {
   const id = request.url.split('/')[2]
   const professional = JSON.parse(request.data)
 

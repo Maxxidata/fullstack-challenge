@@ -8,7 +8,7 @@ const DataGrid = ({ columns, pagination, path, keyField, onNew, onEdit }) => {
   const { isLoading, data } = useFetch(path)
 
   const dataSource = useMemo(() => {
-    return data.items?.map((item) => ({ key: item[keyField], ...item }))
+    return data?.map((item) => ({ key: item[keyField], ...item }))
   }, [data])
 
   const handleOnNew = useCallback(() => {
@@ -72,7 +72,7 @@ DataGrid.propTypes = {
 DataGrid.defaultProps = {
   columns: [],
   pagination: {
-    pageSize: 5,
+    pageSize: 20,
     current: 1
   },
   onNew: null,
