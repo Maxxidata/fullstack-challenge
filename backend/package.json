@@ -1,0 +1,16 @@
+{
+    "name": "maxxidata-challenge-backend",
+    "version": "0.0.1",
+    "description": "Maxxidata Challenge - Backend",
+    "main": "src/index.js",
+    "author": "Juan Carlos <juanksoliveira@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
+}
