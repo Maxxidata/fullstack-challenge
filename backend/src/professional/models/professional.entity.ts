@@ -4,16 +4,12 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
-  JoinTable,
-  OneToMany,
   ManyToOne,
-} from "typeorm";
-import { ProfessionalType } from './ProfessionalType.entity';
+} from 'typeorm';
+import { ProfessionalType } from './professional-type.entity';
 
 @Entity()
 export class Professional {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -34,10 +30,16 @@ export class Professional {
   @Column()
   situation: boolean;
 
-  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
   public createdAt: Date;
 
-  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
   public updatedAt: Date;
-
 }

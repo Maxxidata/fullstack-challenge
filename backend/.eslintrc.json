@@ -1,0 +1,57 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "root": true,
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": [
+      "@typescript-eslint",
+      "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "no-useless-constructor": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "camelcase": "off",
+    "no-console":"off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}
