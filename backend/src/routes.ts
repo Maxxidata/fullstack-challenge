@@ -31,7 +31,7 @@ export const Routes = [
     method: "delete",
     route: "/professional/:id",
     controller: ProfessionalController,
-    action: "remove"
+    action: "delete"
   },
   // Professional Types routes
   {
@@ -62,6 +62,6 @@ export const Routes = [
     method: "delete",
     route: "/professional-type/:id",
     controller: ProfessionalTypeController,
-    action: "remove"
+    action: "delete"
   }
 ];

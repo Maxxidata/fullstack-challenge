@@ -3,8 +3,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToMany,
+  OneToMany,
+  ManyToOne
 } from "typeorm";
+import { Professional } from "./Professional.entity";
 
 @Entity()
 export class ProfessionalType {
@@ -17,6 +21,9 @@ export class ProfessionalType {
 
   @Column()
   situation: boolean;
+
+  @OneToMany(() => Professional, professional => professional.id)
+  professionals: Professional[];
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   public createdAt: Date;

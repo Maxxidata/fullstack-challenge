@@ -4,8 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToOne,
-  JoinColumn
+  ManyToMany,
+  JoinTable,
+  OneToMany,
+  ManyToOne,
 } from "typeorm";
 import { ProfessionalType } from './ProfessionalType.entity';
 
@@ -24,8 +26,9 @@ export class Professional {
   @Column({ nullable: true })
   email: string;
 
-  @JoinColumn()
-  @OneToOne(() => ProfessionalType, professionalType => professionalType.id)
+  @ManyToOne(() => ProfessionalType, professionalType => professionalType.id, {
+    eager: true,
+  })
   professionalType: ProfessionalType;
 
   @Column()
