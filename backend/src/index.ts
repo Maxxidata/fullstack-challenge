@@ -22,7 +22,7 @@ createConnection().then(async connection => {
     });
   });
 
-  app.listen(3000);
+  app.listen(3333);
 
   console.log("Server running on port 3000");
 }).catch(error => console.log(error));
