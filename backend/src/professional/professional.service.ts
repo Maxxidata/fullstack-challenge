@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { NotFoundException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProfessionalDto } from './dto/professional.dto';
@@ -17,24 +17,24 @@ export class ProfessionalService {
     return this.professionalRepository.find();
   }
 
-  async getOne(id: number): Promise<Professional | BadRequestException> {
+  async getOne(id: number): Promise<Professional | NotFoundException> {
     const professional = await this.professionalRepository.findOne(id);
 
     if (!professional) {
-      throw new BadRequestException('Professional not found');
+      throw new NotFoundException('Professional not found');
     }
 
-    return this.professionalRepository.findOne(id);
+    return professional;
   }
 
   async create(
     dto: ProfessionalDto,
-  ): Promise<Professional | BadRequestException> {
+  ): Promise<Professional | NotFoundException> {
     const professionalType = await this.professionalTypeService.getOne(
       dto.professionalType.id,
     );
 
-    if (professionalType instanceof BadRequestException) {
+    if (professionalType instanceof NotFoundException) {
       throw professionalType;
     }
 
@@ -44,30 +44,42 @@ export class ProfessionalService {
   async update(
     id: number,
     dto: ProfessionalDto,
-  ): Promise<Professional | BadRequestException> {
+  ): Promise<Professional | NotFoundException> {
+    const professional = await this.professionalRepository.findOne(id);
+
+    if (!professional) {
+      throw new NotFoundException('Professional not found');
+    }
+
     const professionalType = await this.professionalTypeService.getOne(
       dto.professionalType.id,
     );
 
-    if (professionalType instanceof BadRequestException) {
+    if (professionalType instanceof NotFoundException) {
       throw professionalType;
     }
 
-    const professional = ProfessionalDto.toEntity(dto);
+    const professionalDto = ProfessionalDto.toEntity(dto);
 
-    professional.id = Number(id);
+    professionalDto.id = Number(id);
 
-    return this.professionalRepository.save(professional);
+    return this.professionalRepository.save(professionalDto);
   }
 
   // eslint-disable-next-line consistent-return
-  async delete(id: number): Promise<void | BadRequestException> {
+  async delete(id: number): Promise<boolean | NotFoundException> {
     const professional = await this.professionalRepository.findOne(id);
 
     if (!professional) {
-      throw new BadRequestException('Professional not found');
+      throw new NotFoundException('Professional not found');
     }
 
-    await this.professionalRepository.delete(id);
+    const deleted = await this.professionalRepository.delete(id);
+
+    if (deleted) {
+      return true;
+    }
+
+    return false;
   }
 }

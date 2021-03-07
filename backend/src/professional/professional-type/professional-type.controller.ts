@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -7,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  NotFoundException,
 } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ProfessionalTypeDto } from '../dto/professional-type.dto';
@@ -42,7 +42,7 @@ export class ProfessionalTypeController {
   @Get(':id')
   async getOne(
     @Param('id') id: number,
-  ): Promise<ProfessionalType | BadRequestException> {
+  ): Promise<ProfessionalType | NotFoundException> {
     return this.professionalTypeService.getOne(id);
   }
 
@@ -53,7 +53,7 @@ export class ProfessionalTypeController {
     type: ProfessionalType,
   })
   @ApiOkResponse({
-    type: ProfessionalType || BadRequestException,
+    type: ProfessionalType || NotFoundException,
     description: 'Create professional type',
   })
   @Post()
@@ -68,14 +68,14 @@ export class ProfessionalTypeController {
     type: ProfessionalType,
   })
   @ApiOkResponse({
-    type: ProfessionalType || BadRequestException,
+    type: ProfessionalType || NotFoundException,
     description: 'Update professional type',
   })
   @Put(':id')
   async update(
     @Param('id') id: number,
     @Body() params: ProfessionalTypeDto,
-  ): Promise<ProfessionalType | BadRequestException> {
+  ): Promise<ProfessionalType | NotFoundException> {
     return this.professionalTypeService.update(id, params);
   }
 
@@ -83,7 +83,7 @@ export class ProfessionalTypeController {
     description: 'Delete a professional type',
   })
   @Delete(':id')
-  async delete(@Param('id') id: number): Promise<void | BadRequestException> {
+  async delete(@Param('id') id: number): Promise<boolean | NotFoundException> {
     return this.professionalTypeService.delete(id);
   }
 }

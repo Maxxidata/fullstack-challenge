@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { NotFoundException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProfessionalTypeDto } from '../dto/professional-type.dto';
@@ -15,11 +15,11 @@ export class ProfessionalTypeService {
     return this.professionalTypeRepository.find();
   }
 
-  async getOne(id: number): Promise<ProfessionalType | BadRequestException> {
+  async getOne(id: number): Promise<ProfessionalType | NotFoundException> {
     const professionalType = await this.professionalTypeRepository.findOne(id);
 
     if (!professionalType) {
-      throw new BadRequestException('Professional type not found');
+      throw new NotFoundException('Professional type not found');
     }
 
     return professionalType;
@@ -29,22 +29,37 @@ export class ProfessionalTypeService {
     return this.professionalTypeRepository.save(dto);
   }
 
-  async update(id: number, dto: ProfessionalTypeDto): Promise<any> {
-    const professionalType = ProfessionalTypeDto.toEntity(dto);
-
-    professionalType.id = Number(id);
-
-    return this.professionalTypeRepository.save(professionalType);
-  }
-
-  // eslint-disable-next-line consistent-return
-  async delete(id: number): Promise<void | BadRequestException> {
+  async update(
+    id: number,
+    dto: ProfessionalTypeDto,
+  ): Promise<ProfessionalType | NotFoundException> {
     const professionalType = await this.professionalTypeRepository.findOne(id);
 
     if (!professionalType) {
-      throw new BadRequestException('Professional type not found');
+      throw new NotFoundException('Professional type not found');
     }
 
-    await this.professionalTypeRepository.delete(id);
+    const professionalTypeDto = ProfessionalTypeDto.toEntity(dto);
+
+    professionalTypeDto.id = Number(id);
+
+    return this.professionalTypeRepository.save(professionalTypeDto);
+  }
+
+  // eslint-disable-next-line consistent-return
+  async delete(id: number): Promise<boolean | NotFoundException> {
+    const professionalType = await this.professionalTypeRepository.findOne(id);
+
+    if (!professionalType) {
+      throw new NotFoundException('Professional type not found');
+    }
+
+    const deleted = await this.professionalTypeRepository.delete(id);
+
+    if (deleted) {
+      return true;
+    }
+
+    return false;
   }
 }
