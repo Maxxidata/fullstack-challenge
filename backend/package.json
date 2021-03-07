@@ -23,11 +23,12 @@
   "dependencies": {
     "@nestjs/common": "^7.6.13",
     "@nestjs/core": "^7.6.13",
-    "@types/dotenv": "^8.2.0",
     "@nestjs/platform-express": "^7.6.13",
     "@nestjs/swagger": "^4.7.15",
     "@nestjs/typeorm": "^7.1.5",
+    "@types/dotenv": "^8.2.0",
     "@types/pg": "^7.14.11",
+    "@types/swagger-ui-express": "^4.1.2",
     "dotenv": "^8.2.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
