@@ -1,0 +1,26 @@
+.professional-type-wrapper {
+  background-color: #ccc;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.professional-type-row {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.professional-type-list-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.professional-type-list-actions {
+  width: 3em;
+  display: flex;
+  justify-content: space-between;
+}
