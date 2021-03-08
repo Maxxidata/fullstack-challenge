@@ -1,5 +1,5 @@
 import { DeleteTwoTone, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import { Card, Table } from 'antd';
+import { Card, notification, Table } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -16,8 +16,23 @@ const SimpleList: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInte
   }, [])
 
   const loadProfessionalTypes = async () => {
-    const response = await api.get('/professional-type');
+    const response = await api.get('professional-type');
     setProfessionalTypes(response.data);
+  }
+
+  const openNotification = (message: string, backgroundColor: string) => {
+    notification.open({ message, style: { backgroundColor } });
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await api.delete(`professional-type/${id}`);
+      openNotification('Profissão excluída com sucesso', '#77DD77');
+      loadProfessionalTypes();
+    } catch(err) {
+      console.log(err);
+      openNotification('Erro ao excluir profissão', '#FF6961');
+    }
   }
   
   const columns = [
@@ -39,12 +54,7 @@ const SimpleList: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInte
         <div key={id} className='professional-type-list-actions'>
           <Link to={{ pathname: `/professional-types-edit/${id}` }}><EditOutlined /></Link>
           <DeleteTwoTone
-            onClick={
-              async () => {
-                await api.delete(`/professional-type/${id}`);
-                loadProfessionalTypes();
-              }
-            }
+            onClick={() => { handleDelete(id) }}
             twoToneColor='#eb2f96'
           />
         </div>

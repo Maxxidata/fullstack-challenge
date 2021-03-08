@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Button, Select, FormInstance, Skeleton } from 'antd';
+import { Form, Input, Button, Select, FormInstance, Skeleton, notification } from 'antd';
 import { IProfessionalType } from '../../professional-type.interface';
 import { IForm } from '../../../../shared/Interfaces/Form.interface';
 import api from '../../../../services/api';
@@ -25,19 +25,32 @@ const ProfessionalForm: React.FC<IForm> = ({ id = 0 }: IForm) => {
     situation: professionalType.situation ? 1 : 0,
   } : {};
 
+  const openNotification = (message: string, backgroundColor: string) => {
+    notification.open({ message, style: { backgroundColor } });
+  };
+
   const onFinish = async (request: any) => {
     request.situation = request.situation === 1;
 
     try{
       if(!professionalType){
         await api.post('professional-type', request);
+        openNotification('Profissão criada com sucesso', '#77DD77');
       } else {
         await api.put(`professional-type/${id}`, request);
+        openNotification('Profissão atualizada com sucesso', '#77DD77');
       }
       // eslint-disable-next-line no-restricted-globals
       return history.back();
     } catch(err) {
-      return err;
+      console.log(err)
+      if(!professionalType) {
+        openNotification('Erro ao criar profissão', '#FF6961');
+      } else {
+        openNotification('Erro ao editar profissão', '#FF6961');
+      }
+      // eslint-disable-next-line no-restricted-globals
+      return history.back();
     }
 
   };

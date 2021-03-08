@@ -11,7 +11,7 @@ const ProfessionalsProfessionalTypes: React.FC = () => {
   }, [])
 
   const loadProfessionals = async () => {
-    const response = await api.get('/professional');
+    const response = await api.get('professional');
     setProfessionals(response.data);
   }
 

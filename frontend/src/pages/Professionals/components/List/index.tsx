@@ -1,5 +1,5 @@
 import { DeleteTwoTone, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import { Card, Table } from 'antd';
+import { Card, notification, Table } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,8 +17,23 @@ const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterfac
   }, [])
 
   const loadProfessionals = async () => {
-    const response = await api.get('/professional');
+    const response = await api.get('professional');
     setProfessionals(response.data);
+  }
+
+  const openNotification = (message: string, backgroundColor: string) => {
+    notification.open({ message, style: { backgroundColor } });
+  };
+
+  const handleDelete = async (id: number) => {
+    try{
+      await api.delete(`professional/${id}`);
+      openNotification('Profissional excluído com sucesso', '#77DD77');
+      loadProfessionals();
+    } catch(err) {
+      console.log(err);
+      openNotification('Erro ao excluir profissional', '#FF6961');
+    }
   }
 
   const columns = [
@@ -66,12 +81,7 @@ const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterfac
         <div key={id} className='professional-list-actions'>
           <Link to={{ pathname: `/professionals-edit/${id}` }}><EditOutlined /></Link>
           <DeleteTwoTone
-            onClick={
-              async () => {
-                await api.delete(`/professional/${id}`);
-                loadProfessionals();
-              }
-            }
+            onClick={() => { handleDelete(id) }}
             twoToneColor='#eb2f96'
           />
         </div>
