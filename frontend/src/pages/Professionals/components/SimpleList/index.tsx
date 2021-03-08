@@ -1,5 +1,5 @@
 import { DeleteTwoTone, EditOutlined, PlusOutlined } from '@ant-design/icons';
-import { Card, notification, Table } from 'antd';
+import { Card, notification, Popconfirm, Table } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -53,10 +53,14 @@ const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListIn
       render: (id: number) => (
         <div key={id} className='professional-list-actions'>
           <Link to={{ pathname: `/professionals-edit/${id}` }}><EditOutlined /></Link>
-          <DeleteTwoTone
-            onClick={() => { handleDelete(id) }}
-            twoToneColor='#eb2f96'
-          />
+          <Popconfirm
+            title="Tem certeza que deseja excluir esse profissional?"
+            onConfirm={() => { handleDelete(id) }}
+            okText="Sim"
+            cancelText="Não"
+          >
+            <DeleteTwoTone twoToneColor='#eb2f96'/>
+          </Popconfirm>
         </div>
       ),
     },
