@@ -1,6 +1,6 @@
-import { ProfessionalTypeInterface } from "../ProfessionalTypes/professional-type.interface";
+import { IProfessionalType } from "../ProfessionalTypes/professional-type.interface";
 
-export interface ProfessionalInterface {
+export interface IProfessional {
   id: number;
 
   name: string;
@@ -9,7 +9,7 @@ export interface ProfessionalInterface {
 
   email?: string;
   
-  professionalType: ProfessionalTypeInterface,
+  professionalType: IProfessionalType,
   
   situation: boolean,
 }

@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import api from '../../../../services/api';
 
 import { ListInterface } from '../../../../shared/Interfaces/List.interface';
-import { ProfessionalTypeInterface } from '../../professional-type.interface';
+import { IProfessionalType } from '../../professional-type.interface';
 
 const List: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInterface) => {
-  const [professionalTypes, setProfessionalTypes] = useState<ProfessionalTypeInterface[]>([]);
+  const [professionalTypes, setProfessionalTypes] = useState<IProfessionalType[]>([]);
   
   useEffect(() => {
     loadProfessionalTypes()
@@ -44,7 +44,7 @@ const List: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInterface)
       key: 'actions',
       render: (id: number) => (
         <div key={id} className='professional-type-list-actions'>
-          <Link to="/professional-types-edit"><EditOutlined /></Link>
+          <Link to={{ pathname: `/professional-types-edit/${id}` }}><EditOutlined /></Link>
           <DeleteTwoTone
             onClick={
               async () => {
@@ -63,7 +63,7 @@ const List: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInterface)
     <Card
       title={title}
       hoverable
-      extra={<Link to="/professionals-type-add"><PlusOutlined /></Link>}
+      extra={<Link to="/professional-types-add"><PlusOutlined /></Link>}
     >
       <Table dataSource={professionalTypes} columns={columns} pagination={false} />
     </Card>

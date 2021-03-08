@@ -1,4 +1,4 @@
-export interface HeaderInterface {
+export interface IHeader {
   title: string;
 
   subtitle?: string;

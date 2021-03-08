@@ -1,10 +1,10 @@
 import { Card } from 'antd';
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-import { ProfessionalInterface } from '../Professionals/professional.interface';
+import { IProfessional } from '../Professionals/professional.interface';
 
 const ProfessionalsProfessionalTypes: React.FC = () => {
-  const [professionals, setProfessionals] = useState<ProfessionalInterface[]>([]);
+  const [professionals, setProfessionals] = useState<IProfessional[]>([]);
 
   useEffect(() => {
     loadProfessionals()

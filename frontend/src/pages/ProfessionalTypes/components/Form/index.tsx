@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Select, FormInstance } from 'antd';
-import { ProfessionalTypeInterface } from '../../professional-type.interface';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Button, Select, FormInstance, Skeleton } from 'antd';
+import { IProfessionalType } from '../../professional-type.interface';
+import { IForm } from '../../../../shared/Interfaces/Form.interface';
+import api from '../../../../services/api';
 
 const { Option } = Select;
 
-const mockProfessionalType = {
-  id: 1,
-  description: 'this is a description',
-  situation: true,
-}
-
-const ProfessionalForm: React.FC = () => {
+const ProfessionalForm: React.FC<IForm> = ({ id = 0 }: IForm) => {
   const formRef = React.createRef<FormInstance>();
+
+  const [professionalType, setProfessionalType] = useState<IProfessionalType>();
+  const [loading, setLoading] = useState(!!id);
+
+  useEffect(() => {
+    loadProfessional(id)
+  }, [id])
+  
+  async function loadProfessional(professionalTypeId: number) {
+    const response = await api.get(`professional-type/${professionalTypeId}`);
+    setProfessionalType(response.data);
+    setLoading(false);
+  };
   
   const onSituationChange = (value: string) => {
     switch (value) {
@@ -34,51 +43,47 @@ const ProfessionalForm: React.FC = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const INITIAL_VALUES: ProfessionalTypeInterface = {
-      id: 0,
-      description: '',
-      situation: false,
-  };
-
-  if (mockProfessionalType.id) {
-    INITIAL_VALUES.description = mockProfessionalType.description
-    INITIAL_VALUES.situation = mockProfessionalType.situation
-  }
+  const INITIAL_VALUES = professionalType && professionalType.id ? {
+    description: professionalType.description,
+    situation: professionalType.situation,
+  } : {};
 
   return (
-    <Form
-      ref={formRef}
-      style={{ width: '100%' }}
-      name="basic"
-      initialValues={INITIAL_VALUES}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
-      <Form.Item
-        label="Descrição"
-        name="description"
-        rules={[{ required: true, message: 'Por favor insira uma descrição!' }]}
+    <Skeleton active loading={loading} paragraph={{ rows: 8 }}>
+      <Form
+        ref={formRef}
+        style={{ width: '100%' }}
+        name="basic"
+        initialValues={INITIAL_VALUES}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item name="situation" label="Situação" rules={[{ required: true, message: 'Por favor escolha uma situação!' }]}>
-        <Select
-          placeholder="Selecione uma opção"
-          onChange={onSituationChange}
-          allowClear
+        <Form.Item
+          label="Descrição"
+          name="description"
+          rules={[{ required: true, message: 'Por favor insira uma descrição!' }]}
         >
-          <Option value="true">Ativo</Option>
-          <Option value="false">Inativo</Option>
-        </Select>
-      </Form.Item>
-      
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+          <Input />
+        </Form.Item>
+
+        <Form.Item name="situation" label="Situação" rules={[{ required: true, message: 'Por favor escolha uma situação!' }]}>
+          <Select
+            placeholder="Selecione uma opção"
+            onChange={onSituationChange}
+            allowClear
+          >
+            <Option value="true">Ativo</Option>
+            <Option value="false">Inativo</Option>
+          </Select>
+        </Form.Item>
+        
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </Skeleton>
   )
 }
 

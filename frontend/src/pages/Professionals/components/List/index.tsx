@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 import api from '../../../../services/api';
 
 import { ListInterface } from '../../../../shared/Interfaces/List.interface';
-import { ProfessionalTypeInterface } from '../../../ProfessionalTypes/professional-type.interface';
-import { ProfessionalInterface } from '../../professional.interface';
+import { IProfessionalType } from '../../../ProfessionalTypes/professional-type.interface';
+import { IProfessional } from '../../professional.interface';
 
 const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterface) => {
-  const [professionals, setProfessionals] = useState<ProfessionalInterface[]>([]);
+  const [professionals, setProfessionals] = useState<IProfessional[]>([]);
   
   useEffect(() => {
     loadProfessionals()
@@ -46,7 +46,7 @@ const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterfac
       title: 'Profissão',
       dataIndex: 'professionalType',
       key: 'professionalType',
-      render: (professionalType: ProfessionalTypeInterface) => {
+      render: (professionalType: IProfessionalType) => {
         return professionalType.description
       }
     },
@@ -64,7 +64,7 @@ const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterfac
       key: 'actions',
       render: (id: number) => (
         <div key={id} className='professional-list-actions'>
-          <Link to="/professionals-edit"><EditOutlined /></Link>
+          <Link to={{ pathname: `/professionals-edit/${id}` }}><EditOutlined /></Link>
           <DeleteTwoTone
             onClick={
               async () => {

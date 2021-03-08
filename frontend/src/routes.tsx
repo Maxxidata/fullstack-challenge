@@ -18,11 +18,11 @@ const Routes: React.FC = () => {
       
       <Route path="/professionals" component={Professionals} />
       <Route path="/professionals-add" component={AddProfessional} />
-      <Route path="/professionals-edit" component={EditProfessional} />
+      <Route path="/professionals-edit/:id" component={EditProfessional} />
 
       <Route path="/professional-types" component={ProfessionalTypes} />
-      <Route path="/professionals-type-add" component={AddProfessionalType} />
-      <Route path="/professionals-type-edit" component={EditProfessionalType} />
+      <Route path="/professional-types-add" component={AddProfessionalType} />
+      <Route path="/professional-types-edit/:id" component={EditProfessionalType} />
     </BrowserRouter>
   );
 }

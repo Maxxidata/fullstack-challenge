@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import api from '../../../../services/api';
 
 import { ListInterface } from '../../../../shared/Interfaces/List.interface';
-import { ProfessionalInterface } from '../../professional.interface';
+import { IProfessional } from '../../professional.interface';
 
 const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterface) => {
-  const [professionals, setProfessionals] = useState<ProfessionalInterface[]>([]);
+  const [professionals, setProfessionals] = useState<IProfessional[]>([]);
   
   useEffect(() => {
     loadProfessionals()
@@ -37,7 +37,7 @@ const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListIn
       key: 'actions',
       render: (id: number) => (
         <div key={id} className='professional-list-actions'>
-          <Link to="/professionals-edit"><EditOutlined /></Link>
+          <Link to={{ pathname: `/professionals-edit/${id}` }}><EditOutlined /></Link>
           <DeleteTwoTone
             onClick={
               async () => {
@@ -56,7 +56,7 @@ const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListIn
     <Card
       title={title}
       hoverable
-      extra={<Link to="/professionals-add"><PlusOutlined /></Link>}
+      extra={<Link to="/professionals-add" ><PlusOutlined /></Link>}
     >
       <Table dataSource={professionals} columns={columns} pagination={false} />
     </Card>

@@ -1,4 +1,4 @@
-export interface ProfessionalTypeInterface {
+export interface IProfessionalType {
   id: number;
 
   description: string;

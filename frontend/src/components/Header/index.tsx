@@ -2,9 +2,9 @@ import { PageHeader } from 'antd';
 import React from 'react';
 
 import './index.css';
-import { HeaderInterface } from './Header.interface';
+import { IHeader } from './Header.interface';
 
-const Header: React.FC<HeaderInterface> = ({ title, subtitle = '', onBack = true}: HeaderInterface) => {
+const Header: React.FC<IHeader> = ({ title, subtitle = '', onBack = true}: IHeader) => {
   return (
     <>
       { onBack ?

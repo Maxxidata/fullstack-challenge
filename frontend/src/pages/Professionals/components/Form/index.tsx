@@ -1,50 +1,47 @@
-import React, { useState } from 'react';
-import { AutoComplete, Form, Input, Button, Select, FormInstance } from 'antd';
-import { ProfessionalInterface } from '../../professional.interface';
+import React, { useEffect, useState } from 'react';
+import { AutoComplete, Form, Input, Button, Select, FormInstance, Skeleton } from 'antd';
+import { IProfessional } from '../../professional.interface';
+import { IProfessionalType } from '../../../ProfessionalTypes/professional-type.interface';
+import api from '../../../../services/api';
+import { IForm } from '../../../../shared/Interfaces/Form.interface';
 
 const { Option } = Select;
 
-const mockProfessional = {
-  id: 1,
-  name: "teste",
-  phone: "(xx) xxxx",
-  email: "a@a.com",
-  professionalType: {
-    id: 1,
-    description: "this is a desc",
-    situation: true,
-  },
-  situation: true,
-}
-
-const mockVal = (str: string, repeat = 1) => ({
-  value: str.repeat(repeat),
-});
-
-const ProfessionalForm: React.FC = () => {
+const ProfessionalForm: React.FC<IForm> = ({ id = 0 }: IForm) => {
   const formRef = React.createRef<FormInstance>();
 
-  const [professionalType, setProfessionalType] = useState('');
-  const [options, setOptions] = useState<{ value: string }[]>([]);
+  const [professionalType, setProfessionalType] = useState<IProfessionalType>();
+  const [options, setOptions] = useState<string[]>([]);
+  const [professional, setProfessional] = useState<IProfessional>();
+  const [loading, setLoading] = useState(!!id);
+
+  useEffect(() => {
+    loadProfessional(id)
+  }, [id])
+  
+  async function loadProfessional(professionalId: number) {
+    const response = await api.get(`professional/${professionalId}`);
+    setProfessional(response.data);
+    setLoading(false);
+  };
+
   const onSearch = (searchText: string) => {
-    setOptions(
-      !searchText ? [] : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)],
-    );
+    setOptions(['a', 'b']);
   };
   const onSelect = (data: string) => {
     console.log('onSelect', data);
   };
   const onChange = (data: string) => {
-    setProfessionalType(data);
+    // setProfessionalType({ id: 1, description: 'dsad' });
   };
   
   const onSituationChange = (value: string) => {
     switch (value) {
       case 'true':
-        formRef.current!.setFieldsValue({ note: 'Hi, man!' });
+        formRef.current!.setFieldsValue({ note: 'Ativo' });
         return;
       case 'false':
-        formRef.current!.setFieldsValue({ note: 'Hi, lady!' });
+        formRef.current!.setFieldsValue({ note: 'Inativo' });
         break;  
       default:
         break;
@@ -59,93 +56,83 @@ const ProfessionalForm: React.FC = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const INITIAL_VALUES: ProfessionalInterface = {
-      id: 0,
-      name: "",
-      phone: "",
-      email: "",
-      professionalType: {
-        id: 0,
-        description: '',
-        situation: false,
-      },
-      situation: false,
-  };
-
-  if (mockProfessional.id) {
-    INITIAL_VALUES.name = mockProfessional.name;
-    INITIAL_VALUES.phone = mockProfessional.phone;
-    INITIAL_VALUES.email = mockProfessional.email;
-    INITIAL_VALUES.professionalType = mockProfessional.professionalType;
-    INITIAL_VALUES.situation = mockProfessional.situation
-  }
+  const INITIAL_VALUES = professional && professional.id ? {
+    id: professional.id,
+    name: professional.name,
+    phone: professional.phone,
+    email: professional.email,
+    professionalType: professional.professionalType,
+    situation: professional.situation,
+  } : {};
 
   return (
-    <Form
-      ref={formRef}
-      style={{ width: '100%' }}
-      name="basic"
-      initialValues={INITIAL_VALUES}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
-      <Form.Item
-        label="Nome"
-        name="name"
-        rules={[{ required: true, message: 'Por favor insira seu nome!' }]}
+    <Skeleton active loading={loading} paragraph={{ rows: 8 }}>
+      <Form
+        ref={formRef}
+        style={{ width: '100%' }}
+        name="basic"
+        initialValues={INITIAL_VALUES}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Telefone"
-        name="phone"
-        rules={[{ required: true, message: 'Por favor insira seu número de telefone!' }]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[{ required: true, message: 'Por favor insira seu email!' }]}
-      >
-        <Input type='email' />
-      </Form.Item>
-
-      <Form.Item
-        label="Profissão"
-        name="professionalType"
-        rules={[{ required: true, message: 'Por favor escolha uma profissão!' }]}
-      >
-        <AutoComplete
-          value={professionalType}
-          options={options}
-          style={{ width: 200 }}
-          onSelect={onSelect}
-          onSearch={onSearch}
-          onChange={onChange}
-          placeholder="control mode"
-        />
-      </Form.Item>
-
-      <Form.Item name="situation" label="Situação" rules={[{ required: true, message: 'Por favor escolha uma situação!' }]}>
-        <Select
-          placeholder="Selecione uma opção"
-          onChange={onSituationChange}
-          allowClear
+        <Form.Item
+          label="Nome"
+          name="name"
+          rules={[{ required: true, message: 'Por favor insira seu nome!' }]}
         >
-          <Option value="true">Ativo</Option>
-          <Option value="false">Inativo</Option>
-        </Select>
-      </Form.Item>
-      
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Telefone"
+          name="phone"
+          rules={[{ required: true, message: 'Por favor insira seu número de telefone!' }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: 'Por favor insira seu email!' }]}
+        >
+          <Input type='email' />
+        </Form.Item>
+
+        <Form.Item
+          label="Profissão"
+          name="professionalType"
+          rules={[{ required: true, message: 'Por favor escolha uma profissão!' }]}
+        >
+          <AutoComplete
+            value='dada'
+            // options={options}
+            style={{ width: 200 }}
+            onSelect={onSelect}
+            onSearch={onSearch}
+            onChange={onChange}
+            placeholder="control mode"
+          />
+        </Form.Item>
+
+        <Form.Item name="situation" label="Situação" rules={[{ required: true, message: 'Por favor escolha uma situação!' }]}>
+          <Select
+            placeholder="Selecione uma opção"
+            onChange={onSituationChange}
+            allowClear
+          >
+            <Option value="true">Ativo</Option>
+            <Option value="false">Inativo</Option>
+          </Select>
+        </Form.Item>
+        
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </Skeleton>
   )
 }
 

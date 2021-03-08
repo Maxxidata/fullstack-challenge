@@ -1,10 +1,14 @@
 import { Card, Col, Row } from 'antd';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import Header from '../../../../components/Header';
+import { IEdit } from '../../../../shared/Interfaces/Edit.interface';
 import Form from '../../components/Form';
 
-const Update: React.FC = () => {
+const Edit: React.FC = () => {
+  const { id } = useParams<IEdit>();
+
   return (
     <>
       <Header title='Profissionais' />
@@ -17,7 +21,7 @@ const Update: React.FC = () => {
               hoverable
             >
               <div className='professional-list-container'>
-                <Form />
+                <Form id={Number(id)} />
               </div>
             </Card>
           </Col>
@@ -27,4 +31,4 @@ const Update: React.FC = () => {
   );
 }
 
-export default Update;
+export default Edit;
