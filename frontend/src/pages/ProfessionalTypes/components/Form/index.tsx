@@ -7,8 +7,6 @@ import api from '../../../../services/api';
 const { Option } = Select;
 
 const ProfessionalForm: React.FC<IForm> = ({ id = 0 }: IForm) => {
-  const formRef = React.createRef<FormInstance>();
-
   const [professionalType, setProfessionalType] = useState<IProfessionalType>();
   const [loading, setLoading] = useState(!!id);
 
@@ -21,65 +19,57 @@ const ProfessionalForm: React.FC<IForm> = ({ id = 0 }: IForm) => {
     setProfessionalType(response.data);
     setLoading(false);
   };
-  
-  const onSituationChange = (value: string) => {
-    switch (value) {
-      case 'true':
-        formRef.current!.setFieldsValue({ note: 'Hi, man!' });
-        return;
-      case 'false':
-        formRef.current!.setFieldsValue({ note: 'Hi, lady!' });
-        break;  
-      default:
-        break;
-    }
-  };
-
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
 
   const INITIAL_VALUES = professionalType && professionalType.id ? {
     description: professionalType.description,
-    situation: professionalType.situation,
+    situation: professionalType.situation ? 1 : 0,
   } : {};
+
+  const onFinish = async (request: any) => {
+    request.situation = request.situation === 1;
+
+    try{
+      if(!professionalType){
+        await api.post('professional-type', request);
+      } else {
+        await api.put(`professional-type/${id}`, request);
+      }
+      // eslint-disable-next-line no-restricted-globals
+      return history.back();
+    } catch(err) {
+      return err;
+    }
+
+  };
 
   return (
     <Skeleton active loading={loading} paragraph={{ rows: 8 }}>
       <Form
-        ref={formRef}
         style={{ width: '100%' }}
-        name="basic"
         initialValues={INITIAL_VALUES}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="Descrição"
           name="description"
           rules={[{ required: true, message: 'Por favor insira uma descrição!' }]}
         >
-          <Input />
+          <Input placeholder="Digite uma descrição" />
         </Form.Item>
 
         <Form.Item name="situation" label="Situação" rules={[{ required: true, message: 'Por favor escolha uma situação!' }]}>
           <Select
             placeholder="Selecione uma opção"
-            onChange={onSituationChange}
             allowClear
           >
-            <Option value="true">Ativo</Option>
-            <Option value="false">Inativo</Option>
+            <Option value={1}>Ativo</Option>
+            <Option value={0}>Inativo</Option>
           </Select>
         </Form.Item>
         
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            {!professionalType ? 'Criar' : 'Salvar'}
           </Button>
         </Form.Item>
       </Form>
