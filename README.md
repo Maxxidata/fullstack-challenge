@@ -38,7 +38,7 @@ Vamos criar então uma aplicação que nos permita consultar, criar e editar ess
 {
   "id": xxx,                  // ID 
   "descricao": "test",        // descricao do tipo *Obrigatório
-  "situacao": "true",         // situacao do cadastro *Obrigatório
+  "situacao": true,           // situacao do cadastro *Obrigatório
   "updatedAt": "",            // data e hora ultima atualizacao *Obrigatório
   "createdAt": ""             // data e hora de cadastro *Obrigatório
 }
