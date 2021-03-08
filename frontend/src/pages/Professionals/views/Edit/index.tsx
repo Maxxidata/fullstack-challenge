@@ -14,7 +14,7 @@ const Update: React.FC = () => {
           <Col span={16}>
             <Card
               title='Editar Profissional'
-              bordered={false}
+              hoverable
             >
               <div className='professional-list-container'>
                 <Form />

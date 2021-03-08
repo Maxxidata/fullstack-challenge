@@ -10,7 +10,9 @@ const mockProfessional = {
   phone: "(xx) xxxx",
   email: "a@a.com",
   professionalType: {
-    id: 1
+    id: 1,
+    description: "this is a desc",
+    situation: true,
   },
   situation: true,
 }
@@ -63,7 +65,9 @@ const ProfessionalForm: React.FC = () => {
       phone: "",
       email: "",
       professionalType: {
-        id: 0
+        id: 0,
+        description: '',
+        situation: false,
       },
       situation: false,
   };

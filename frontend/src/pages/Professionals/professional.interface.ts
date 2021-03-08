@@ -1,3 +1,5 @@
+import { ProfessionalTypeInterface } from "../ProfessionalTypes/professional-type.interface";
+
 export interface ProfessionalInterface {
   id: number;
 
@@ -7,9 +9,7 @@ export interface ProfessionalInterface {
 
   email?: string;
   
-  professionalType: {
-    id: number
-  },
+  professionalType: ProfessionalTypeInterface,
   
   situation: boolean,
 }

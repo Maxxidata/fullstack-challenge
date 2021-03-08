@@ -1,6 +1,4 @@
 .professional-type-wrapper {
-  background-color: #ccc;
-  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,5 +20,6 @@
 .professional-type-list-actions {
   width: 3em;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }

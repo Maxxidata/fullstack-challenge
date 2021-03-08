@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AutoComplete, Form, Input, Button, Select, FormInstance } from 'antd';
+import { Form, Input, Button, Select, FormInstance } from 'antd';
 import { ProfessionalTypeInterface } from '../../professional-type.interface';
 
 const { Option } = Select;
@@ -9,10 +9,6 @@ const mockProfessionalType = {
   description: 'this is a description',
   situation: true,
 }
-
-const mockVal = (str: string, repeat = 1) => ({
-  value: str.repeat(repeat),
-});
 
 const ProfessionalForm: React.FC = () => {
   const formRef = React.createRef<FormInstance>();

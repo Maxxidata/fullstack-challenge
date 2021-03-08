@@ -6,10 +6,9 @@ import { Link } from 'react-router-dom';
 import api from '../../../../services/api';
 
 import { ListInterface } from '../../../../shared/Interfaces/List.interface';
-import { ProfessionalTypeInterface } from '../../../ProfessionalTypes/professional-type.interface';
 import { ProfessionalInterface } from '../../professional.interface';
 
-const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterface) => {
+const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterface) => {
   const [professionals, setProfessionals] = useState<ProfessionalInterface[]>([]);
   
   useEffect(() => {
@@ -20,7 +19,7 @@ const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterfac
     const response = await api.get('/professional');
     setProfessionals(response.data);
   }
-
+  
   const columns = [
     {
       title: 'ID',
@@ -31,32 +30,6 @@ const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterfac
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-    },
-    {
-      title: 'Telefone',
-      dataIndex: 'phone',
-      key: 'phone',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
-    },
-    {
-      title: 'Profissão',
-      dataIndex: 'professionalType',
-      key: 'professionalType',
-      render: (professionalType: ProfessionalTypeInterface) => {
-        return professionalType.description
-      }
-    },
-    {
-      title: 'Situação',
-      dataIndex: 'situation',
-      key: 'situation',
-      render: (situation: boolean) => {
-        return situation ? 'Ativo' : 'Inativo'
-      }
     },
     {
       title: 'Ações',
@@ -90,4 +63,4 @@ const List: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterfac
   );
 }
 
-export default List;
+export default SimpleList;

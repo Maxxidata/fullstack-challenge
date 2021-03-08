@@ -1,13 +1,14 @@
 import { DeleteTwoTone, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Card, Table } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import api from '../../../../services/api';
 
 import { ListInterface } from '../../../../shared/Interfaces/List.interface';
 import { ProfessionalTypeInterface } from '../../professional-type.interface';
 
-const List: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInterface) => {
+const SimpleList: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInterface) => {
   const [professionalTypes, setProfessionalTypes] = useState<ProfessionalTypeInterface[]>([]);
   
   useEffect(() => {
@@ -29,14 +30,6 @@ const List: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInterface)
       title: 'Descrição',
       dataIndex: 'description',
       key: 'description',
-    },
-    {
-      title: 'Situação',
-      dataIndex: 'situation',
-      key: 'situation',
-      render: (situation: boolean) => {
-        return situation ? 'Ativo' : 'Inativo'
-      }
     },
     {
       title: 'Ações',
@@ -70,4 +63,4 @@ const List: React.FC<ListInterface> = ({ title = 'Profissões' }: ListInterface)
   );
 }
 
-export default List;
+export default SimpleList;

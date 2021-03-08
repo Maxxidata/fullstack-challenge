@@ -2,8 +2,8 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
-import ProfessionalList from '../Professionals/components/List';
-import ProfessionalTypeList from '../ProfessionalTypes/components/List';
+import ProfessionalList from '../Professionals/components/SimpleList';
+import ProfessionalTypeList from '../ProfessionalTypes/components/SimpleList';
 
 import './index.css'
 import ProfessionalsProfessionalTypes from '../ProfessionalsProfessionalTypes';
