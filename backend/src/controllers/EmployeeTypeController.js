@@ -2,29 +2,78 @@ const EmployeeTypeRepository = require("../repositories/EmployeeTypeRepository")
 
 const EmployeeTypeController = {
     async index(req, res) {
-        console.log("EmployeeTypeController index");
-        EmployeeTypeRepository.findAll();
-        res.send({});
+        try {
+            const { page, size } = req.query;
+
+            const employeeTypes = await EmployeeTypeRepository.findAll(page, size);
+
+            return res.send(employeeTypes);
+        } catch (err) {
+            console.error(err);
+            return res.status(500).send({ error: "Internal error 500" });
+        }
     },
     async show(req, res) {
-        console.log("EmployeeTypeController show");
-        EmployeeTypeRepository.findById();
-        res.send({});
+        try {
+            const { id } = req.params;
+
+            const foundEmployeeType = await EmployeeTypeRepository.findById(id);
+            if (!foundEmployeeType)
+                return res.status(404).send({ error: "Employee Type not found" });
+
+            return res.send(foundEmployeeType);
+        } catch (err) {
+            console.error(err);
+            return res.status(500).send({ error: "Internal error 500" });
+        }
     },
     async create(req, res) {
-        console.log("EmployeeTypeController create");
-        EmployeeTypeRepository.create();
-        res.send({});
+        try {
+            const rawEmployeeType = req.body;
+
+            const createdEmployeeType = await EmployeeTypeRepository.create(
+                rawEmployeeType
+            );
+
+            return res.status(201).send(createdEmployeeType);
+        } catch (err) {
+            console.error(err);
+            return res.status(500).send({ error: "Internal error 500" });
+        }
     },
     async update(req, res) {
-        console.log("EmployeeTypeController update");
-        EmployeeTypeRepository.update();
-        res.send({});
+        try {
+            const { id } = req.params;
+            const employeeType = req.body;
+
+            const [
+                affectedRows,
+                updatedEmployeeType,
+            ] = await EmployeeTypeRepository.update(id, employeeType);
+
+            if (!affectedRows)
+                return res.status(400).send({ error: "Employee Type not updated." });
+
+            return res.send(updatedEmployeeType);
+        } catch (err) {
+            console.error(err);
+            return res.status(500).send({ error: "Internal error 500" });
+        }
     },
     async remove(req, res) {
-        console.log("EmployeeTypeController remove");
-        EmployeeTypeRepository.delete();
-        res.send({});
+        try {
+            const { id } = req.params;
+
+            const removedEmployeeType = await EmployeeTypeRepository.delete(id);
+
+            if (removedEmployeeType === 0)
+                return res.status(404).send({ error: "Employee Type not found" });
+
+            return res.status(204).send();
+        } catch (err) {
+            console.error(err);
+            return res.status(500).send({ error: "Internal error 500" });
+        }
     },
 };
 
