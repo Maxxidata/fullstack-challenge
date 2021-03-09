@@ -1,5 +1,5 @@
 # Objetivo
-Repositório destinado ao desafio proposta da Maxxidata
+Repositório destinado ao desafio proposto da Maxxidata
 
 # Sobre o desenvolvimento
 ## Backend
