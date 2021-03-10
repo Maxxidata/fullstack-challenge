@@ -32,12 +32,12 @@ A documentação da API foi feita utilizando o *Swagger*. Para acessar a documen
 ### Como executar?
 Para executar o projeto:
 - Ambiente de desenvolvimento
-  - Usando Docker: `docker-compose up`
+  - Usando Docker (lembre-se de alterar o host do banco de dados para *'DB_HOST=postgres'* no arquivo .env - isso por conta do container *postgres* que está na mesma rede): `docker-compose up`
   
   - Usando Yarn: `yarn start:dev`
 
 - Ambiente de produção
-  - Usando Docker (lembre-se de alterar o host do banco de dados para *'DB_HOST=postgres'* no arquivo .env - isso por conta do nome do container que se chama *postgres*): `docker build -t nome_do_container . && docker run backend`
+  - Usando Docker: `docker build -t nome_do_container . && docker run nome_do_container`
 
   - Usando Yarn: `yarn build && yarn start:prod`
 ## Frontend
