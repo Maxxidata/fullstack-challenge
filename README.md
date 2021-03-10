@@ -1,14 +1,15 @@
 # Objetivo
 Repositório destinado ao desafio proposto da Maxxidata
-
 # Sobre o desenvolvimento
 ## Backend
+### Escolhas
 Para desenvolver o backend decidi utilizar o framework [NestJS](https://nestjs.com/) pois já tenho uma certa familiaridade.
 
-- A arquitetura de pastas que utilizo na aplicação é baseada em módulos e submódulos.
+A arquitetura de pastas que utilizo na aplicação é baseada em módulos e submódulos.
   - Ex.: tenho um módulo para **Profissionais** e dentro dele há um submódulo: **Tipo de Profissional** (ou Profissões).
 
-- A documentação da API foi feita utilizando o *Swagger*. Para acessar a documentação, basta acessar o link `http://localhost:3333/api` quando a aplicação estiver em execução.
+### Documentação
+A documentação da API foi feita utilizando o *Swagger*. Para acessar a documentação, basta acessar o link `http://localhost:3333/api` quando a aplicação estiver em execução.
 
 - Rotas 
   - Profissionais
@@ -28,6 +29,17 @@ Para desenvolver o backend decidi utilizar o framework [NestJS](https://nestjs.c
 
   ![Rotas de Profissionais](readme-files/professional-type/schema.png)
 
+### Como executar?
+Para executar o projeto:
+- Ambiente de desenvolvimento
+  - Usando Docker: `docker-compose up`
+  
+  - Usando Yarn: `yarn start:dev`
+
+- Ambiente de produção
+  - Usando Docker (lembre-se de alterar o host do banco de dados para *'DB_HOST=postgres'* no arquivo .env - isso por conta do nome do container que se chama *postgres*): `docker build -t nome_do_container . && docker run backend`
+
+  - Usando Yarn: `yarn build && yarn start:prod`
 ## Frontend
 Para desenvolver o frontend decidi utilizar o [ReactJS](https://reactjs.org/) + [Ant Design](https://ant.design/) pois já tenho uma certa familiaridade.
 
@@ -66,3 +78,7 @@ Para desenvolver o frontend decidi utilizar o [ReactJS](https://reactjs.org/) + 
 - Editar profissão
 
   ![Nova profissisão](readme-files/professional-type/edit.png)
+
+### Como executar?
+Para executar o projeto:
+- Basta executar o comando: `yarn start`
