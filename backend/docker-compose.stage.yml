@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  app-stage:
+    container_name: maxxidata-app-stage
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres-stage
+      - app-migration
+    environment:
+      DB_HOST: "postgres-stage"
+      DB_DATABASE: ${DB_DATABASE:-maxxidata_prod}
+      DB_USER: ${DB_USER:-root}
+      DB_PASS: ${DB_PASS:-root}
+
+  app-migration:
+    container_name: maxxidata-migration-stage
+    build: .
+    entrypoint: ["npx", "sequelize-cli", "db:migrate"]
+    depends_on:
+      - postgres-stage
+    environment:
+      DB_HOST: "postgres-stage"
+      DB_DATABASE: ${DB_DATABASE:-maxxidata_prod}
+      DB_USER: ${DB_USER:-root}
+      DB_PASS: ${DB_PASS:-root}
+
+  postgres-stage:
+    container_name: maxxidata-postgres-stage
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    volumes:
+      - postgres-stage:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-maxxidata_prod}
+      POSTGRES_USER: ${DB_USER:-root}
+      POSTGRES_PASSWORD: ${DB_PASS:-root}
+volumes:
+  postgres-stage:
