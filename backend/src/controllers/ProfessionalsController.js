@@ -6,11 +6,15 @@ class ProfessionalsController {
     async index(request, response){
         const { id } = request.params;
         
-        const professional = await Professional.findByPk(id, {
-            include: { association: 'type', attributes: ['description'] }
-        });
+        try {
+            const professional = await Professional.findByPk(id, {
+                include: { association: 'type', attributes: ['description'] }
+            });    
 
-        return response.status(200).json(professional)
+            return response.status(200).json(professional)
+        } catch (error) {
+            return response.status(404).json({message: 'Could not find Professional'});
+        }
     }
     async show(request, response){
         const professionals = await Professional.findAll({
@@ -37,32 +41,35 @@ class ProfessionalsController {
         const { id } = request.params;
         const { name, email, phone, situation, type_of_professional } = request.body;
 
-        let professional = await Professional.findByPk(id);
+        try {
+            let professional = await Professional.findByPk(id);
 
-        if (!professional) return response.status(404).json()
+            const description = type_of_professional.toUpperCase();
+            const [ typeOfProfessional ] = await TypeOfProfessional.findOrCreate({
+                where: { description }
+            })
 
-        const description = type_of_professional.toUpperCase();
-        const [ typeOfProfessional ] = await TypeOfProfessional.findOrCreate({
-            where: { description }
-        })
+            const updatedProfessional = await professional.update({
+                name, email, phone, situation, type_of_professional: typeOfProfessional.dataValues.id
+            })
 
-        const updatedProfessional = await professional.update({
-            name, email, phone, situation, type_of_professional: typeOfProfessional.dataValues.id
-        })
-
-        return response.status(200).json(updatedProfessional)
+            return response.status(200).json(updatedProfessional);
+        } catch (error) {
+            return response.status(404).json({message: 'Professional not found'});
+        }
     }
     async destroy(request, response){
         const { id } = request.params
 
-        const professional = await Professional.findByPk(id);
+        try {
+            const professional = await Professional.findByPk(id);
 
-        if(!professional) return response.status(404)
+            await professional.destroy();
 
-        console.log(professional)
-        await professional.destroy();
-
-        return response.status(204).json()
+            return response.status(204).json();
+        } catch (error) {
+            return response.status(404).json({message: 'Could not delete'});
+        }
     }
 }
 

@@ -5,11 +5,15 @@ class TypeOfProfessionalController {
     async index(request, response){
         const { id } = request.params;
         
-        const professional = await TypeOfProfessional.findByPk(id, {
-            include: { association: 'type', attributes: ['id', 'name'] }
-        });
-
-        return response.status(200).json(professional)
+        try {
+            const professional = await TypeOfProfessional.findByPk(id, {
+                include: { association: 'type', attributes: ['id', 'name'] }
+            });
+    
+            return response.status(200).json(professional);
+        } catch (error) {
+            return response.status(404).json({message: 'Could not find types'});
+        }
     }
     async show(request, response){
         const typeOfProfessionals = await TypeOfProfessional.findAll();
@@ -32,28 +36,29 @@ class TypeOfProfessionalController {
         const { id } = request.params;
         const { type_of_professional } = request.body;
 
-        let typeOfProfessional = await TypeOfProfessional.findByPk(id)
-
-        if (!typeOfProfessional) return response.status(404).json();
-
-        console.log("Formatada "+type_of_professional);
-        
-        const typeOfProfessionalUpdated = await typeOfProfessional.update({
-            description: type_of_professional.toUpperCase()
-        })
-
-        return response.status(200).json(typeOfProfessionalUpdated)
+        try {
+            let typeOfProfessional = await TypeOfProfessional.findByPk(id)
+            const typeOfProfessionalUpdated = await typeOfProfessional.update({
+                description: type_of_professional.toUpperCase()
+            })
+    
+            return response.status(200).json(typeOfProfessionalUpdated);
+        } catch (error) {
+            return response.status(404).json({mesage: 'Could not update type'});
+        }
     }
     async destroy(request, response){
         const { id } = request.params
 
-        const typesOfProfessionals = await TypeOfProfessional.findByPk(id);
+        try {
+            const typesOfProfessionals = await TypeOfProfessional.findByPk(id);
 
-        if(!typesOfProfessionals) return response.status(404)
+            await typesOfProfessionals.destroy();
 
-        await typesOfProfessionals.destroy();
-
-        return response.status(204).json()
+            return response.status(204).json();
+        } catch (error) {
+            return response.status(404).json({message: 'Could not delete types'});
+        }
     }
 }
 
