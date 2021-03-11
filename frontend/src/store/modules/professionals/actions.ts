@@ -1,8 +1,4 @@
-interface ActionReturn {
-  type: string;
-
-  payload?: any
-}
+import { ActionReturn } from "./interfaces/actions.interface";
 
 export const types = {
   SET_LOADING: '@professionals: set loading',

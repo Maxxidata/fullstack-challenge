@@ -7,13 +7,9 @@ function* getProfessionals() {
   yield put(actions.setLoading());
 
   const response: AxiosResponse = yield call(api.findAll);
-
   const { data } = response;
-  yield put(
-    actions.setProfessionals({
-      data,
-    })
-  );
+  
+  yield put(actions.setProfessionals({ data }));
 }
 
 export default function* professionalsSaga(): Generator<AllEffect<ForkEffect<never>>, void, unknown> {

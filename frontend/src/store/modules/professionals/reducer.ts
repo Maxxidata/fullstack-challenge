@@ -1,14 +1,5 @@
 import { types } from './actions';
-
-interface ActionPayload {
-  type: string;
-  payload: { data: [] };
-}
-
-interface IProfessionalReducer {
-  data: any,
-  loading: boolean,
-}
+import { ActionPayload, IProfessionalReducer } from './interfaces/reducer.interface';
 
 const INITIAL_STATE: IProfessionalReducer = {
   data: [],
