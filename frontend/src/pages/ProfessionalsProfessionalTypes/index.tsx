@@ -1,24 +1,22 @@
 import { Card } from 'antd';
-import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { actions } from '../../store/modules/professionals/actions';
 import { IProfessional } from '../Professionals/professional.interface';
 
 const ProfessionalsProfessionalTypes: React.FC = () => {
-  const [professionals, setProfessionals] = useState<IProfessional[]>([]);
+  const dispatch = useDispatch();
+
+  const professionals: IProfessional[] = useSelector((state: any) => state.professionals.data);
 
   useEffect(() => {
-    loadProfessionals()
-  }, [])
-
-  const loadProfessionals = async () => {
-    const response = await api.get('professional');
-    setProfessionals(response.data);
-  }
+    dispatch(actions.getProfessionals());
+  }, [dispatch]);
 
   return (
     <Card title="Profissionais - Profissões" hoverable>
-      {professionals.map(professional => (
-        <div>
+      {professionals.map((professional: IProfessional) => (
+        <div key={professional.id}>
           {professional.name} - {professional.professionalType.description}
         </div>
       ))}

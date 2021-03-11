@@ -1,24 +1,24 @@
 import { DeleteTwoTone, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Card, notification, Popconfirm, Table } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import api from '../../../../services/api';
 
 import { ListInterface } from '../../../../shared/Interfaces/List.interface';
+import { actions } from '../../../../store/modules/professionals/actions';
 import { IProfessional } from '../../professional.interface';
 
 const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListInterface) => {
-  const [professionals, setProfessionals] = useState<IProfessional[]>([]);
-  
-  useEffect(() => {
-    loadProfessionals()
-  }, [])
+  const dispatch = useDispatch();
 
-  const loadProfessionals = async () => {
-    const response = await api.get('professional');
-    setProfessionals(response.data);
-  }
+  const professionals: IProfessional[] = useSelector((state: any) => state.professionals.data);
+  const loadProfessionals: boolean = useSelector((state: any) => state.professionals.loading);
+
+  useEffect(() => {
+    dispatch(actions.getProfessionals());
+  }, [dispatch]);
 
   const openNotification = (message: string, backgroundColor: string) => {
     notification.open({ message, style: { backgroundColor } });
@@ -28,7 +28,7 @@ const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListIn
     try{
       await api.delete(`professional/${id}`);
       openNotification('Profissional excluído com sucesso', '#77DD77');
-      loadProfessionals();
+      dispatch(actions.getProfessionals());
     } catch(err) {
       console.log(err);
       openNotification('Erro ao excluir profissional', '#FF6961');
@@ -72,7 +72,12 @@ const SimpleList: React.FC<ListInterface> = ({ title = 'Profissionais' }: ListIn
       hoverable
       extra={<Link to="/professionals-add" ><PlusOutlined /></Link>}
     >
-      <Table dataSource={professionals} columns={columns} pagination={false} />
+      <Table
+        loading={loadProfessionals}
+        dataSource={professionals}
+        columns={columns}
+        pagination={false}
+      />
     </Card>
   );
 }
