@@ -109,7 +109,7 @@ Estes requisitos são opcionais no desafio, sinta-se a vontade para deixá-los d
 # FAQ :question:
 > Como devo fazer a entrega do desafio?
 
-- Faça um Fork deste repositório crie um branch de trabalho e nos mande o Pull Request. Depois disso é só atualizar com o link do seu Pull Request no formulário do processo seletivo.
+- Envie o link do seu repositório de código particular para quem te fez a solicitação de execução desse desafio.
 
 > Se eu tiver dúvidas?
 - Entre em contato com nosso time que esta te apoiando no processo seletivo ou pelo rh@maxxidata.com.
