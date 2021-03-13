@@ -2,11 +2,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background-color: #caf0f8;
 `;
 
 export const Content = styled.div`
@@ -51,6 +50,7 @@ export const Content = styled.div`
     }
     table{
         width: 900px;
+        margin-bottom: 20px;
     }
 
     table tr:first-child {
@@ -65,20 +65,34 @@ export const Content = styled.div`
     }
 
     table tr th {
+        display: flex;
         padding: 20px;
         width: 300px;
     }
 
     table tr{
         display: flex;
+        button{
+            border: none;
+            background-color: transparent;
+            margin-right: 10px;
+        }
+        svg{
+            display: block;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+        }
     }
     table tr td{
         display: flex;
         padding: 10px;
+        padding-left: 18px;
         width: 100%;
-        justify-content: center;
+        justify-content: space-between;
     }
     table tr:last-child {
         border-radius: 0 0 5px 5px;
+        padding-bottom: 5px;
     }
 `;

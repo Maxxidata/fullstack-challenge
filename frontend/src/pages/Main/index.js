@@ -4,6 +4,7 @@ import ModalAddProfessional from '../../components/ModalAddProfessional'
 
 import { FiFilter } from 'react-icons/fi';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { MdDeleteForever } from 'react-icons/md'
 
 import { Container, Content } from './styles';
 
@@ -14,8 +15,9 @@ const Main = ()=>{
     const [professionals, setProfessionals] = useState([]);
     const [types, setTypes] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectValue, setSelectValue] = useState('0');
 
-    //Uses multiple requests to store the status of professionals and types of professionals
+    //Uses multiple requests to store the state of professionals and types of professionals
     useEffect(()=>{
         axios.all([
             api.get('/professionals'),
@@ -23,13 +25,28 @@ const Main = ()=>{
         ]).then(axios.spread((responseProfessionals, responseTypes) =>{
             setProfessionals(responseProfessionals.data); //store inital professionals
             setTypes(responseTypes.data); //store types of professionals
-        }))
-    },[]);
+            }))
+    },[selectValue]);
+    
+    useEffect(()=>{
+        async function loadFilteredProfessionals(){
+            const response = await api.get('/professionals');
+            selectValue === '0'?
+            setProfessionals(response.data):
+            setProfessionals(response.data.filter(
+                professional => {
+                    if(professional.type.description === selectValue) return professional
+                }
+            ));
+        }
+        loadFilteredProfessionals()
+    }, [selectValue])
 
+    //Open modal and show Form
     async function openModal(){
         setIsModalOpen(!isModalOpen);
     }
-
+    //Do a post request to add Professional
     async function handleAddProfessional(data){
         setIsModalOpen(!isModalOpen);
         try {
@@ -39,6 +56,20 @@ const Main = ()=>{
         } catch (error) {
             console.log(error)
         }
+    }
+    //Do a delete request to remove Professional
+    async function handleDeleteProfessional(id){
+        try {
+            await api.delete(`/professionals/${id}`)
+            console.log(id)
+            setProfessionals(professionals.filter(professional => professional.id !== id));
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    //Filter professionals by type
+    const handleChangeSelect = (e)=>{
+        setSelectValue(e.target.value);
     }
 
     return(
@@ -57,11 +88,11 @@ const Main = ()=>{
                 </button>
                 <div>
                     <FiFilter /> <p></p>
-                    <select  name="type">
+                    <select value={selectValue} onChange={handleChangeSelect}  name="type">
                         <option value="0">Filtrar por...</option>
                         {types.map(type=>{
                             return (
-                                <option key={type.id} value={type.id}> {type.description} </option>
+                                <option key={type.id} value={type.description}> {type.description} </option>
                             )
                         })}
                     </select> 
@@ -74,17 +105,20 @@ const Main = ()=>{
                     <th> <h3>Profissão</h3> </th>
                     <th><h3>Telefone</h3></th>
                     </tr>
-                    {professionals.map((professional)=>{
+                    {professionals && professionals.map((professional)=>{
                         return(
                             <tr key={professional.id} >
                             <td> <strong>{professional.name}</strong> </td>
                             
-                            {professional.type.description ?
-                            <td> <strong> {professional.type.description} </strong> </td>:
-                            <td> <strong> --- </strong> </td>
-                            }
+                            <td> <strong> {professional.type.description} </strong> </td>
+                            
+                            <td> 
+                                <strong> {professional.phone} </strong> 
+                                <button onClick={()=> handleDeleteProfessional(professional.id)} > 
+                                    <MdDeleteForever/> 
+                                </button>
+                            </td>
 
-                            <td> <strong> {professional.phone} </strong> </td>
                             </tr>
                         )
                     })}
