@@ -21,14 +21,21 @@ export const Content = styled.div`
         display: flex;
         flex-direction: row;
         justify-content:space-between;
-
+        button{
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: none;
+            background-color: transparent;
+            color: #03045e;
+        }
         div{
             display: flex;
             justify-content: center;
             align-items: center;
             select{
             width: 100%;
-            max-width: 20ch;
+            max-width: ch;
             border: none;
             background-color: transparent;
             color: #03045e;
