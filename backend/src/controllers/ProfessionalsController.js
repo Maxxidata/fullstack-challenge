@@ -31,11 +31,16 @@ class ProfessionalsController {
             where: { description }
         })
         
-        const profissional = await Professional.create({
-            name, email, phone, situation, type_of_professional: typeOfProfessional.dataValues.id
-        })
+        const professional = await Professional.create({
+            name, email, phone, situation, 
+            type_of_professional: typeOfProfessional.dataValues.id
+        })//save Professional on database
 
-        return response.status(200).json(profissional)
+        const professionalSaved = await Professional.findByPk(professional.id, {
+            include: {association: 'type', attributes: ['description']}
+        })//return professional with associations
+
+        return response.status(200).json(professionalSaved)
     }
     async update(request, response){
         const { id } = request.params;

@@ -7,7 +7,7 @@ class TypeOfProfessionalController {
         
         try {
             const professional = await TypeOfProfessional.findByPk(id, {
-                include: { association: 'type', attributes: ['id', 'name'] }
+                include: { association: 'type', attributes: ['id', 'name', 'phone'] }
             });
     
             return response.status(200).json(professional);
@@ -16,7 +16,9 @@ class TypeOfProfessionalController {
         }
     }
     async show(request, response){
-        const typeOfProfessionals = await TypeOfProfessional.findAll();
+        const typeOfProfessionals = await TypeOfProfessional.findAll({
+            include: {association: 'type', attributes: ['id', 'name', 'phone']}
+        });
 
         if (!typeOfProfessionals) return request.status(404).json()
 
