@@ -40,7 +40,7 @@ class ProfessionalsController {
             include: {association: 'type', attributes: ['description']}
         })//return professional with associations
 
-        return response.status(200).json(professionalSaved)
+        return response.status(201).json(professionalSaved)
     }
     async update(request, response){
         const { id } = request.params;

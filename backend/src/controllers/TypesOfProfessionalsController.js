@@ -32,7 +32,7 @@ class TypeOfProfessionalController {
             where: { description }
         });
 
-        return response.status(200).json(typeOfProfessional)
+        return response.status(201).json(typeOfProfessional)
     }
     async update(request, response){
         const { id } = request.params;
