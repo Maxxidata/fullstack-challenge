@@ -78,8 +78,7 @@ Corpo da requisição:
 
 ```json
 {
-  "type_of_professional": "...",
-  "situacao": true
+  "type_of_professional": "..."
 }
 ```
 
@@ -156,21 +155,23 @@ Retorno: HTTP 200
 ]
 ```
 
-:large_blue_circle: ​`GET /employees/:id`
+:large_blue_circle: ​`GET /professionals/:id`
 
 Retorno: HTTP 200
 
 ```json
 {
-  "id": "87b36c6c-74da-470c-a263-2af51b978363",
-  "nome": "Trace Predovic MD",
-  "telefone": "###.###.#### x#####",
-  "email": "Rey.Schmitt@gmail.com",
-  "tipoDeProfissional": "48b8a36c-090a-4af5-a0e3-c8011d1d57a1",
-  "situacao": true,
-  "createdAt": "2021-03-10T19:53:26.881Z",
-  "updatedAt": "2021-03-10T19:53:26.881Z",
-  "deletedAt": null
+    "id": "c770b7a4-0db0-4a5b-9efd-c6039af4684f",
+    "name": "Franklin",
+    "email": "franklin@gmail.com",
+    "phone": "92 1122-3344",
+    "situation": true,
+    "createdAt": "2021-03-10T19:19:39.802Z",
+    "updatedAt": "2021-03-10T20:17:33.992Z",
+    "type_of_professional": "ec6c1f19-ca13-494b-b6fb-237276de69dc",
+    "type": {
+      "description": "DESENVOLVEDOR FULL STACK"
+    }
 }
 ```
 
@@ -238,6 +239,6 @@ Retorno: HTTP 200
 }
 ```
 
-:large_blue_circle: ​`DELETE /employees/:id`
+:large_blue_circle: ​`DELETE /professionals/:id`
 
 Retorno: HTTP 204 (Sem conteúdo)
