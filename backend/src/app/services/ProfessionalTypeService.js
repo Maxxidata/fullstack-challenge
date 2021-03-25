@@ -1,18 +1,15 @@
+import models from '../models';
 class ProfessionalTypeService {
   constructor() {
-    this.professionalTypes = [
-      { 'name': 'prof1' },
-      { 'name': 'prof2' },
-      { 'name': 'prof3' }
-    ];
+    this.professionalType = models.ProfessionalType;
   }
   
   async list() {
-    return this.professionalTypes;
+    return await this.professionalType.findAll();
   }
 
   async getOne(id) {
-    const professionalType = this.professionalTypes[id];
+    const professionalType = await this.professionalType.findByPk(id);
 
     if (!professionalType) {
       throw "Usuário não encontrado!";
@@ -22,33 +19,17 @@ class ProfessionalTypeService {
   }
 
   async create(data) {
-    this.professionalTypes.push(data);
-    return this.professionalTypes[this.professionalTypes.length-1];
+    return await this.professionalType.create(data);
   }
   
   async update(id, data) {
-    let professionalType = this.professionalTypes[id];
-
-    if (!professionalType) {
-      throw "Usuário não encontrado!";
-    }
-
-    professionalType = data;
-    this.professionalTypes[id] = professionalType;
-    
-    return this.professionalTypes[id];
+    await this.getOne(id);
+    return await this.professionalType.update(data, { where: { id } });
   }
 
   async delete(id) {
-    const professionalType = this.professionalTypes[id];
-
-    if (!professionalType) {
-      throw "Usuário não encontrado!";
-    }
-
-    this.professionalTypes.splice(id, 1);
-    
-    return;
+    await this.getOne(id);
+    return await this.professionalType.destroy({ where: { id } });
   }
 }
 

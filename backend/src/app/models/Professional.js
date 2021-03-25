@@ -1,7 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { database } from '../../database';
 
-const Professional = database.define('professional', {
+import ProfessionalType from './ProfessionalType';
+
+const Professional = database.define('Professional', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
