@@ -1,14 +1,10 @@
+import Professional from '../models/Professional';
+
 class ProfessionalService {
-  constructor() {
-    this.professionals = [
-      { 'name': 'prof1' },
-      { 'name': 'prof2' },
-      { 'name': 'prof3' }
-    ];
-  }
+  constructor() {}
   
   async list() {
-    return this.professionals;
+    return await Professional.findAll();
   }
 
   async getOne(id) {
