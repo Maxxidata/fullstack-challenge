@@ -12,7 +12,7 @@ class ProfessionalTypeService {
     const professionalType = await this.professionalType.findByPk(id);
 
     if (!professionalType) {
-      throw "Usuário não encontrado!";
+      throw "Tipo de Profissional não encontrado!";
     }
 
     return professionalType;
