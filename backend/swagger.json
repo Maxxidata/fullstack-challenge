@@ -1,0 +1,359 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Fullstack Challenge"
+  },
+  "paths": {
+    "/professional": {
+      "get": {
+        "tags": [
+          "Professional"
+        ],
+        "description": "List professionals",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Professional"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Professional"
+        ],
+        "description": "Create new professional",
+        "parameters": [
+          {
+            "name": "professional",
+            "in": "body",
+            "description": "Professional that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Professional"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New professional is created",
+            "schema": {
+              "$ref": "#/definitions/Professional"
+            }
+          }
+        }
+      }
+    },
+    "/professional/:id": {
+      "get": {
+        "tags": [
+          "Professional"
+        ],
+        "description": "Get one professional",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "body",
+            "description": "Professional's ID that we want to get",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Professional"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Professional"
+        ],
+        "description": "Update professional",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Data to update",
+            "schema": {
+              "$ref": "#/definitions/Professional"
+            }
+          },
+          {
+            "name": "id",
+            "in": "body",
+            "description": "Professional's ID that we want to update",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated professional",
+            "schema": {
+              "$ref": "#/definitions/Professional"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Professional"
+        ],
+        "description": "Delete professional",
+        "parameters": [
+          {
+            "name": "professional",
+            "in": "body",
+            "description": "Professional's ID that we want to delete",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success to delete professional"
+          }
+        }
+      }
+    },
+    "/professional-type": {
+      "get": {
+        "tags": [
+          "Professional Type"
+        ],
+        "description": "List professional types",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalType"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Professional Type"
+        ],
+        "description": "Create new professional type",
+        "parameters": [
+          {
+            "name": "professional-type",
+            "in": "body",
+            "description": "Professional Type that we want to create",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalType"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New professional type is created",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalType"
+            }
+          }
+        }
+      }
+    },
+    "/professional-type/:id": {
+      "get": {
+        "tags": [
+          "Professional Type"
+        ],
+        "description": "Get one professional type",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "body",
+            "description": "Professional Type's ID that we want to get",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalType"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Professional Type"
+        ],
+        "description": "Update professional type",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Data to update",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalType"
+            }
+          },
+          {
+            "name": "id",
+            "in": "body",
+            "description": "Professional Type's ID that we want to update",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated professional type",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalType"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Professional Type"
+        ],
+        "description": "Delete professional type",
+        "parameters": [
+          {
+            "name": "professional-type",
+            "in": "body",
+            "description": "Professional Type's ID that we want to delete",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "uniqueItems": true
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success to delete professional type"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Professional": {
+      "required": [
+        "id",
+        "name",
+        "phone",
+        "email",
+        "professionalTypeId",
+        "situation",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string",
+          "nullable": true
+        },
+        "email": {
+          "type": "string",
+          "nullable": true
+        },
+        "professionalTypeId": {
+          "type": "object"
+        },
+        "situation": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "ProfessionalType": {
+      "required": [
+        "id",
+        "description",
+        "situation",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "description": {
+          "type": "string"
+        },
+        "situation": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

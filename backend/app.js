@@ -1,4 +1,6 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 import routes from './src/routes';
 import { database } from './src/database';
 
@@ -8,6 +10,8 @@ database.authenticate()
   .catch(error => console.log(error));
 
 const app = express();
+
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 app.use(routes);
