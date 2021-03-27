@@ -11,7 +11,7 @@ models.ProfessionalType.hasMany(Professional, { foreignKey: 'professionalTypeId'
 models.Professional.belongsTo(ProfessionalType, { foreignKey: 'professionalTypeId' });
 
 database.sync()
-  .then(() => console.log('DB Sync'))
+  .then(() => {})
   .catch(error => console.log(error));
 
 export default models;
