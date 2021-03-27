@@ -3,10 +3,7 @@ Repositório destinado ao desafio proposto da Maxxidata
 # Sobre o desenvolvimento
 ## Backend
 ### Escolhas
-Para desenvolver o backend decidi utilizar o framework [NestJS](https://nestjs.com/) pois já tenho uma certa familiaridade.
-
-A arquitetura de pastas que utilizo na aplicação é baseada em módulos e submódulos.
-  - Ex.: tenho um módulo para **Profissionais** e dentro dele há um submódulo: **Tipo de Profissional** (ou Profissões).
+Para desenvolver o backend decidi utilizar NodeJS + Express pois já tenho uma certa familiaridade.
 
 ### Documentação
 A documentação da API foi feita utilizando o *Swagger*. Para acessar a documentação, basta acessar o link `http://localhost:3333/api` quando a aplicação estiver em execução.
@@ -32,14 +29,8 @@ A documentação da API foi feita utilizando o *Swagger*. Para acessar a documen
 ### Como executar?
 Para executar o projeto:
 - Ambiente de desenvolvimento
-  - Usando Docker (lembre-se de alterar o host do banco de dados para *'DB_HOST=postgres'* no arquivo .env - isso por conta do container *postgres* que está na mesma rede): `docker-compose up`
-  
-  - Usando Yarn: `yarn start:dev`
+  - Usando Yarn: `yarn start`
 
-- Ambiente de produção
-  - Usando Docker: `docker build -t nome_do_container . && docker run nome_do_container`
-
-  - Usando Yarn: `yarn build && yarn start:prod`
 ## Frontend
 Para desenvolver o frontend decidi utilizar o [ReactJS](https://reactjs.org/) + [Ant Design](https://ant.design/) pois já tenho uma certa familiaridade.
 
