@@ -1,5 +1,7 @@
 ![Logo](https://i.postimg.cc/qRXTZZ0z/logo-3.png)
 
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/maxxidata/maxxidata-web-mobile)
+
 - [Desafio FullStack :earth_americas: :computer: :iphone:](#desafio-fullstack-earth_americas-computer-iphone)
 - [Contexto :game_die:](#contexto-game_die)
   - [Modelo de dados :memo:](#modelo-de-dados-memo)
