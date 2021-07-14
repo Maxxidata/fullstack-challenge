@@ -1,6 +1,6 @@
 ![Logo](https://i.postimg.cc/qRXTZZ0z/logo-3.png)
 
-[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/maxxidata/maxxidata-web-mobile)
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/maxxidata/stack#stack)
 
 - [Desafio FullStack :earth_americas: :computer: :iphone:](#desafio-fullstack-earth_americas-computer-iphone)
 - [Contexto :game_die:](#contexto-game_die)
@@ -100,7 +100,6 @@ Estes requisitos são opcionais no desafio, sinta-se a vontade para deixá-los d
 - Configuração Docker para build da imagem do projeto, docker compose para subir banco de dados com carga inicial necessaria (migrations, seeders).
 
 # Com o que nos preocupamos :dart:
-- Primeiramente em deixar claro que o desfio não tem caráter de eliminação
 - Com certeza muito mais do que o desafio completo é avaliarmos suas competências e habilidades até o ponto em que chegou.
 - Sabemos que nem todos temos o mesmo tempo disponível, então como dissemos fique a vontade para ir até onde conseguir ou solicitar mais tempo para o processo, transparência total.
 - Sinta-se livre pra usar bibliotecas de código aberto se fizerem sentido, e lembre que avaliaremos sua capacidade de resolver problemas reais.
