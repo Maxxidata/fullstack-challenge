@@ -85,6 +85,7 @@ Vamos criar então uma aplicação que nos permita consultar, criar e editar ess
 
 ## Diferencial :crossed_swords:
 - Documentação clara do código. Código comentado sempre é bom!
+- Utilização do framework Nest.js.
 - Boas mensagens de commit ajudam!
 
 ## Requisitos não funcionais :cool:
