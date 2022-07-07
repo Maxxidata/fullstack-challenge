@@ -1,0 +1,40 @@
+import React from 'react'
+import { Redirect } from 'react-router-dom'
+
+export default [
+  {
+    path: '/professionals',
+    exact: true,
+    component: React.lazy(() =>
+      import('@/presentation/pages/professional/professional-list/professional-list.jsx')
+    )
+  },
+  {
+    path: '/professionals/form/:id',
+    exact: true,
+    component: React.lazy(() =>
+      import('@/presentation/pages/professional/professional-form/professional-form.jsx')
+    )
+  },
+  {
+    path: '/professional-types',
+    exact: true,
+    component: React.lazy(() =>
+      import(
+        '@/presentation/pages/professional-type/professional-type-list/professional-type-list.jsx'
+      )
+    )
+  },
+  {
+    path: '/professional-types/form/:id',
+    exact: true,
+    component: React.lazy(() =>
+      import('@/presentation/pages/professional-type/professional-type-form/professional-type-form.jsx')
+    )
+  },
+  {
+    path: '/',
+    exact: true,
+    component: () => <Redirect to="/professionals" />
+  }
+]

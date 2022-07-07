@@ -1,0 +1,26 @@
+{
+    "settings": {
+        "react":{
+            "version": "detect"
+        }
+    },
+    "extends": [
+        "standard",
+        "plugin:react/recommended"
+    ],
+    "rules":{
+        "react/display-name": "off"
+    },
+    "plugins":["react"],
+    "overrides": [
+        {
+            "files": [
+                "**/*.spec.js",
+                "**/*.spec.jsx"
+            ],
+            "env": {
+                "jest": true
+            }
+        }
+    ]
+}
