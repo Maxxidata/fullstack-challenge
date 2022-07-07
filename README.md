@@ -67,7 +67,7 @@ Vamos criar então uma aplicação que nos permita consultar, criar e editar ess
 - Escrever os testes para o código e as APIs geradas
 - Prover documentação para API. (Sugestão OpenAPI/Swagger)
 - Use **Node.js** e qualquer outro framework
-- Use **Javascript ECMA**
+- Use **TypeScript**
 - Use qualquer DB. PostgreSQL DB é a sugestão, sinta-se livre para usar qualquer outro.
 
 ### Frontend :computer:
@@ -77,7 +77,7 @@ Vamos criar então uma aplicação que nos permita consultar, criar e editar ess
 - Uma tela de cadastro para cada uma das entidades
 - Implementar solução usando **ReactJS** ultima versão disponível
 - Fique a vontade para utilizar bibliotecas de componentes de mercado ou criar os seus
-- Utilize **Javascript ECMA**
+- Utilize **TypeScript**
 
 ### Mobile :iphone:
 - Também desenvolvemos soluções mobile e procuramos profissionais com essas habilidades e conhecimentos. 
@@ -104,7 +104,7 @@ Estes requisitos são opcionais no desafio, sinta-se a vontade para deixá-los d
 - Sabemos que nem todos temos o mesmo tempo disponível, então como dissemos fique a vontade para ir até onde conseguir ou solicitar mais tempo para o processo, transparência total.
 - Sinta-se livre pra usar bibliotecas de código aberto se fizerem sentido, e lembre que avaliaremos sua capacidade de resolver problemas reais.
 - Procuramos por código funcional e limpo
-- Exemplos práticos de conhecimento em NodeJS e Javascript ECMA e suas APIs padrões
+- Exemplos práticos de conhecimento em NodeJS e TypeScript e suas APIs padrões
 - Orientação a testes 
 
 # FAQ :question:
